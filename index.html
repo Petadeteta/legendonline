@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutoriais LOBR - Guias e Dicas para LEGEND ONLINE BR</title>
+    <!-- Inclui Tailwind CSS para estilização moderna e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define a fonte Inter para todo o documento */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: url('https://i.postimg.cc/HkLddLLp/download.png'); /* Sua imagem como background principal */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Fixa o background para ele não rolar com a página */
+            color: #e0e0e0; /* Texto claro padrão */
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative; /* Para a sobreposição de background */
+        }
+
+        /* Sobreposição sutil para garantir legibilidade do texto sobre a imagem */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3); /* Escurece a imagem levemente */
+            z-index: -1; /* Fica atrás do conteúdo */
+        }
+
+        /* Estilo para o cabeçalho fixo - transparente e limpo */
+        header {
+            background-color: rgba(26, 26, 26, 0.4); /* Semi-transparente */
+            backdrop-filter: blur(5px); /* Efeito de vidro fosco */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        /* Estilo para links de navegação - transparentes e blending */
+        nav a {
+            padding: 0.8rem 1.2rem;
+            display: block;
+            color: #b0b0b0; /* Cor de texto mais suave */
+            text-decoration: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            border-radius: 6px;
+            font-weight: 500;
+            background-color: rgba(255, 255, 255, 0.005); /* MUITO sutil, quase invisível */
+            backdrop-filter: blur(1px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        nav a:hover {
+            background-color: rgba(59, 130, 246, 0.1); /* Azul semi-transparente ao passar o mouse */
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        /* Estilo para o submenu (genérico para Avançado e Classes) */
+        .submenu {
+            display: none; /* Escondido por padrão */
+            position: absolute;
+            background-color: rgba(26, 26, 26, 0.7); /* Fundo do submenu */
+            backdrop-filter: blur(8px);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 0;
+            min-width: 180px;
+            z-index: 1050; /* Acima de outros elementos */
+            animation: fadeInScale 0.3s ease-out;
+        }
+
+        .submenu.active {
+            display: block;
+        }
+
+        .submenu a {
+            padding: 0.75rem 1.5rem;
+            font-weight: 400; /* Texto normal */
+            border: none; /* Remove a borda dos sub-itens */
+            background-color: transparent;
+        }
+        .submenu a:hover {
+            background-color: rgba(59, 130, 246, 0.2);
+            transform: none; /* Sem elevação nos sub-itens */
+            box-shadow: none;
+        }
+
+        /* Animação para o submenu */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+
+        /* Estilo para a seção principal de conteúdo - background da imagem mostra através */
+        main {
+            flex-grow: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente para o conteúdo */
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            margin-bottom: 2rem;
+        }
+        /* Ajuste para o conteúdo dentro do main, para dar um espaçamento extra */
+        main > * {
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        /* Estilo para as seções de conteúdo simuladas (dentro do main) */
+        .content-section {
+            background-color: transparent; /* Já dentro de um main com background */
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        .content-section.active {
+            display: block;
+        }
+
+        /* Botões de ação na home - transparentes e com estilo de runa (minimalista) */
+        .action-button {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #ffffff;
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            font-size: 1.1rem;
+            backdrop-filter: blur(3px);
+        }
+        .action-button:hover {
+            background-color: rgba(59, 130, 246, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            border-color: rgba(59, 130, 246, 0.6);
+        }
+
+        /* Estilo para cards de tutorial/vídeo - transparentes */
+        .tutorial-card {
+            background-color: rgba(31, 31, 31, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tutorial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            background-color: rgba(31, 31, 31, 0.75);
+        }
+
+        /* Specific styles for pet cards to have blue neon on hover */
+        .pet-card {
+            background-color: rgba(31, 31, 31, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease; /* Added border-color to transition */
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Default subtle border */
+        }
+        .pet-card:hover {
+            transform: translateY(-8px);
+            background-color: rgba(31, 31, 31, 0.75);
+            border: 1px solid #4299e1; /* Neon blue border on hover */
+            box-shadow: 0 0 15px rgba(66, 153, 225, 0.8); /* Neon blue glow on hover */
+        }
+
+        .tutorial-card img, .pet-card img { /* Apply to both for consistency */
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .tutorial-card-content, .pet-card-content { /* Apply to both for consistency */
+            padding: 1.2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .tutorial-card h3, .pet-card h3 { /* Apply to both for consistency */
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+            line-height: 1.3;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        .tutorial-card p, .pet-card p { /* Apply to both for consistency */
+            font-size: 0.9rem;
+            color: #c0c0c0;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        .tutorial-card .view-button, .pet-card .view-button { /* Apply to both for consistency */
+            background-color: rgba(59, 130, 246, 0.15);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1.2rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            backdrop-filter: blur(3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            text-align: center; /* Ensure button text is centered */
+        }
+        .tutorial-card .view-button:hover, .pet-card .view-button:hover { /* Apply to both for consistency */
+            background-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Estilo para a seção da Arma Divina para ter o fundo azulado e centralizar o conteúdo */
+        .divine-weapon-section {
+            background-color: rgba(31, 31, 31, 0.6); /* Fundo azulado igual aos pets */
+            backdrop-filter: blur(6px); /* Blurr como os pets */
+            border-radius: 10px; /* Bordas arredondadas como os pets */
+            padding: 2rem; /* Padding como os pets */
+            margin-bottom: 2rem; /* Espaço inferior */
+            text-align: center; /* Centraliza o conteúdo inline-block como o botão */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil como os pets */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra como os pets */
+        }
+        .divine-weapon-section img {
+            max-width: 100%; /* Garante que a imagem não transborde */
+            height: auto;
+            border-radius: 8px; /* Arredonda as bordas da imagem */
+            margin: 1rem auto; /* Centraliza a imagem e adiciona margem vertical */
+            display: block; /* Garante que a margem auto funcione para centralizar */
+            border: 2px solid #4299e1; /* Borda neon azul */
+            box-shadow: 0 0 10px rgba(66, 153, 225, 0.7); /* Brilho neon */
+        }
+
+        /* Estilo para o botão "Saiba Mais sobre a Arma Divina" - Azul vibrante */
+        .highlighted-button {
+            background-color: #4299e1; /* Azul vibrante para o botão */
+            color: white; /* Texto branco */
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #63b3ed; /* Borda um pouco mais clara */
+            box-shadow: 0 5px 15px rgba(66, 153, 225, 0.6); /* Sombra para profundidade */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            font-size: 1.2rem;
+            backdrop-filter: blur(3px); /* Mantém um leve blur */
+            margin-top: 1.5rem; /* Adiciona um espaço acima do botão */
+        }
+
+        .highlighted-button:hover {
+            background-color: #63b3ed; /* Azul mais claro no hover */
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(66, 153, 225, 0.8);
+        }
+
+
+        /* Estilo para o footer - transparente */
+        footer {
+            background-color: rgba(26, 26, 26, 0.4);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+            text-align: center;
+            color: #a0a0a0;
+            font-size: 0.9rem;
+            margin-top: auto;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Estilo da Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro mais sólido para a splash */
+            backdrop-filter: blur(15px); /* Más blur no fundo da splash */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; /* Garante que fique acima de tudo */
+            text-align: center;
+            transition: opacity 1s ease-out, visibility 1s ease-out; /* Transição para esconder */
+        }
+        .splash-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none; /* Desativa interações após esconder */
+        }
+        .splash-screen .splash-content {
+            background-color: rgba(26, 26, 26, 0.7); /* Contêiner do conteúdo da splash */
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            max-width: 90%;
+            animation: fadeInScale 0.8s ease-out; /* Animação de entrada */
+        }
+        .splash-screen h2 {
+            font-size: 3.5rem; /* Título maior */
+            font-weight: 800;
+            color: #4299e1; /* Azul de destaque */
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        .splash-screen .splash-images-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Ajustado para 2 colunas para o primeiro splash também */
+            gap: 1.5rem; /* Más espaçamento */
+            max-width: 900px; /* Largura ajustada */
+            margin-bottom: 2rem;
+            justify-items: center; /* Centraliza os itens dentro de cada célula da grade */
+            align-items: center; /* Centraliza verticalmente na grade */
+        }
+        /* Estilo para o contêiner de cada opção de classe/nível no splash */
+        .splash-class-option, .level-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 3px solid transparent; /* Default transparent border */
+            background-color: rgba(31, 31, 31, 0.6); /* Fundo sutil */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Sombra para profundidade */
+        }
+        .splash-class-option:hover, .level-option:hover {
+            transform: scale(1.03);
+            border-color: #4299e1; /* Neon blue on hover */
+            box-shadow: 0 0 20px rgba(66, 153, 225, 0.8);
+        }
+        .splash-class-option img, .level-option img {
+            width: 100%;
+            height: auto;
+            max-width: 150px; /* Limita o tamanho das imagens no splash para consistência */
+            object-fit: contain;
+            border-radius: 8px; /* Más arredondado */
+        }
+        .splash-class-option p {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 0.5rem; /* Espaço entre imagem e texto */
+        }
+
+        .splash-screen .splash-button {
+            background-color: #4299e1; /* Botón de destaque */
+            color: white;
+            padding: 1.5rem 4rem; /* Botón mayor */
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 25px rgba(66, 153, 225, 0.6); /* Sombra más destacada */
+            border: none;
+            font-size: 1.5rem; /* Fuente mayor */
+        }
+        .splash-screen .splash-button:hover {
+            background-color: #63b3ed;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(66, 153, 225, 0.7);
+        }
+
+        /* Responsividade para o menu de navegação e splash */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                background-color: rgba(26, 26, 26, 0.8);
+                backdrop-filter: blur(10px);
+                position: absolute;
+                top: 64px;
+                left: 0;
+                width: 100%;
+                z-index: 999;
+                padding-bottom: 1rem;
+            }
+            nav.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 2rem;
+                cursor: pointer;
+                padding: 0.5rem 1rem;
+            }
+            .nav-links {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            .nav-links li {
+                width: 100%; /* Garante que os itens ocupem toda a largura */
+            }
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem 0;
+            }
+            .submenu { /* Submenu em mobile */
+                position: static; /* Não flutua más */
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+                background-color: rgba(0, 0, 0, 0.2); /* Fundo más sutil */
+                backdrop-filter: none;
+                border: none; /* Remove borda */
+            }
+            .submenu a {
+                padding-left: 2.5rem; /* Indenta sub-itens */
+                text-align: left;
+            }
+            main { padding: 1.5rem; }
+            .action-button { padding: 1rem 2rem; font-size: 1rem; }
+            .tutorial-card-content { padding: 1rem; }
+            .tutorial-card h3 { font-size: 1rem; }
+            .tutorial-card p { font-size: 0.8rem; }
+
+            .splash-screen h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+            .splash-screen .splash-images-grid {
+                grid-template-columns: 1fr; /* Una columna en pantallas más pequeñas */
+                max-width: 80%; /* Ajusta la anchura */
+            }
+            .splash-screen .splash-images-grid img {
+                border-width: 2px; /* Borde un poco menor */
+            }
+            .splash-screen .splash-button {
+                padding: 1rem 2.5rem;
+                font-size: 1.1rem;
+                box-shadow: 0 4px 10px rgba(66, 153, 225, 0.4);
+            }
+        }
+        @media (min-width: 769px) {
+            .menu-toggle { display: none; }
+            nav { display: flex !important; }
+            .has-submenu { /* Permite que el menú con submenú funcione en el hover en el escritorio */
+                position: relative;
+            }
+            .has-submenu:hover .submenu {
+                display: block;
+            }
+        }
+
+        /* Removi los estilos del banner animado de JS, ya que la imagen es el fondo del body */
+        .animated-banner-container { display: none !important; }
+
+        /* Screen shake animation */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            10% { transform: translateX(-5px); }
+            20% { transform: translateX(5px); }
+            30% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            50% { transform: translateX(-5px); }
+            60% { transform: translateX(5px); }
+            70% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+            90% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+        .dragon-chanter-locked {
+            color: #ef4444 !important; /* Red color */
+            font-weight: bold !important;
+        }
+
+        /* Styles for the new level selection splash screen */
+        .level-option {
+            cursor: pointer;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 3px solid transparent; /* Default transparent border */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza a imagem e o texto verticalmente */
+            text-align: center; /* Centraliza o texto */
+        }
+        .level-option img {
+            margin: 0 auto; /* Garante que a imagem no level-option seja centralizada */
+        }
+        .level-option:hover {
+            transform: scale(1.03);
+        }
+        .level-option.selected {
+            border-color: #4299e1; /* Blue neon when selected */
+            box-shadow: 0 0 20px rgba(66, 153, 225, 0.8);
+        }
+        /* Loading overlay styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            font-size: 2rem;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .loading-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .loading-spinner {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid #4299e1;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mute Button Styles */
+        #muteButton {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            background-color: rgba(31, 31, 31, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 0.75rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 2000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        #muteButton:hover {
+            background-color: rgba(59, 130, 246, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Login Modal Styles */
+        .login-modal-content {
+            background-color: rgba(26, 26, 26, 0.9); /* Fundo escuro semi-transparente */
+            backdrop-filter: blur(10px); /* Efeito de vidro fosco */
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            color: #e0e0e0;
+        }
+        .login-modal-content input[type="email"],
+        .login-modal-content input[type="password"] {
+            background-color: rgba(45, 55, 72, 0.7); /* bg-gray-700 semi-transparente */
+            border: 1px solid rgba(113, 128, 150, 0.5); /* border-gray-600 semi-transparente */
+            color: #e0e0e0;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .login-modal-content input[type="email"]:focus,
+        .login-modal-content input[type="password"]:focus {
+            border-color: #4299e1; /* Azul de foco */
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+            outline: none;
+        }
+        .login-modal-content button {
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        .login-modal-content button.bg-blue-600:hover {
+            background-color: #3182ce;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(66, 153, 225, 0.4);
+        }
+        .login-modal-content button.bg-green-600:hover {
+            background-color: #38a169;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(56, 161, 105, 0.4);
+        }
+        .login-modal-content a {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background music player -->
+    <audio id="background-music" loop volume="0.02"> <!-- Volume ajustado para 0.02 (mais baixo) -->
+        <source src="https://audio.jukehost.co.uk/N3OvmW3b34zLSHVYpteNGlls4XfR6XTt" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <!-- Nova Splash Screen de Seleção de Classe Inicial -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <h2 class="text-blue-300">Bem-vindo(a) ao Tutoriais LOBR!</h2>
+            <p class="text-xl text-white mb-8">Qual sua classe? Escolha uma imagem para começar sua jornada.</p>
+            <div class="splash-images-grid">
+                <!-- Arqueiro -->
+                <div class="splash-class-option">
+                    <img src="https://i.postimg.cc/qMJ3gGPc/1467620870.png" alt="Classe Arqueiro" data-class-choice="arqueiro" onclick="hideInitialSplashScreen('arqueiro')">
+                    <p>Arqueiro</p>
+                </div>
+                <!-- Mago -->
+                <div class="splash-class-option">
+                    <img src="https://i.postimg.cc/sxcGwBhZ/1467620824.png" alt="Classe Mago" data-class-choice="mago" onclick="hideInitialSplashScreen('mago')">
+                    <p>Mago</p>
+                </div>
+                <!-- Guerreiro -->
+                <div class="splash-class-option">
+                    <img src="https://i.postimg.cc/DfdG2Nmy/1467620928.png" alt="Classe Guerreiro" data-class-choice="guerreiro" onclick="hideInitialSplashScreen('guerreiro')">
+                    <p>Guerreiro</p>
+                </div>
+                <!-- Encantador de Dragões -->
+                <div class="splash-class-option">
+                    <img src="https://i.postimg.cc/GmNKkNrn/dragonchant.png" border="0" alt="Classe Encantador de Dragões" data-class-choice="encantador-dragoes" onclick="hideInitialSplashScreen('encantador-dragoes')">
+                    <p>Encantador de Dragões</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nova Splash Screen de Seleção de Nível -->
+    <div id="level-splash-screen" class="splash-screen hidden">
+        <div class="splash-content">
+            <h2 class="text-blue-300">Escolha seu Caminho!</h2>
+            <p class="text-xl text-white mb-8">Você é um aventureiro em avanço ou prefere a Tranca Nível?</p>
+            <div class="splash-images-grid" style="grid-template-columns: repeat(2, 1fr);"> <!-- Ajustado para 2 colunas para centralizar melhor duas imagens -->
+                <div class="level-option" data-level-choice="80avanco">
+                    <img src="https://i.postimg.cc/GmNKkNrn/dragonchant.png" alt="80 Avanço">
+                    <p class="text-white text-lg font-bold mt-2">80 Avanço</p>
+                </div>
+                <div class="level-option" data-level-choice="tranca-nivel">
+                    <img src="https://i.postimg.cc/7YhSmVKH/Screenshot-12.png" alt="Tranca Nível">
+                    <p class="text-white text-lg font-bold mt-2">Tranca Nível</p>
+                </div>
+            </div>
+            <button id="continueLevelBtn" class="splash-button opacity-50 cursor-not-allowed" disabled>Continuar</button>
+        </div>
+    </div>
+
+    <!-- Overlay de Loading -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p class="loading-tip text-xl text-center mt-4">
+            Personalizando sua experiência... O site se adaptará às suas escolhas de classe e nível!
+        </p>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden z-40">
+        <div class="login-modal-content">
+            <button onclick="closeLoginModal()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl">×</button>
+            <h2 class="text-3xl font-bold text-blue-300 mb-6 text-center">Entrar / Registrar</h2>
+            
+            <form id="loginForm" class="space-y-4">
+                <div>
+                    <label for="loginEmail" class="block text-gray-300 text-sm font-bold mb-2">Email:</label>
+                    <input type="email" id="loginEmail" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700" placeholder="seuemail@exemplo.com">
+                </div>
+                <div>
+                    <label for="loginPassword" class="block text-gray-300 text-sm font-bold mb-2">Senha:</label>
+                    <input type="password" id="loginPassword" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700" placeholder="********">
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200">
+                        Entrar
+                    </button>
+                    <a href="javascript:void(0)" onclick="forgotPassword()" class="inline-block align-baseline font-bold text-sm text-blue-400 hover:text-blue-200">
+                        Esqueceu sua senha?
+                    </a>
+                </div>
+            </form>
+
+            <p class="text-center text-gray-400 mt-6">Ainda não tem conta?</p>
+            <button onclick="showRegisterForm()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 mt-2">
+                Registrar
+            </button>
+
+            <form id="registerForm" class="space-y-4 mt-6 hidden">
+                <div>
+                    <label for="registerEmail" class="block text-gray-300 text-sm font-bold mb-2">Email:</label>
+                    <input type="email" id="registerEmail" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700" placeholder="seuemail@exemplo.com">
+                </div>
+                <div>
+                    <label for="registerPassword" class="block text-gray-300 text-sm font-bold mb-2">Senha:</label>
+                    <input type="password" id="registerPassword" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700" placeholder="********">
+                </div>
+                <div>
+                    <label for="confirmPassword" class="block text-gray-300 text-sm font-bold mb-2">Confirmar Senha:</label>
+                    <input type="password" id="confirmPassword" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:shadow-outline bg-gray-800 border-gray-700" placeholder="********">
+                </div>
+                <button type="submit" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 w-full">
+                    Criar Conta
+                </button>
+                <p class="text-center text-gray-400 mt-4">Já tem uma conta? <a href="javascript:void(0)" onclick="showLoginForm()" class="text-blue-400 hover:text-blue-200">Entrar</a></p>
+            </form>
+
+            <div id="loginMessage" class="mt-4 text-center text-red-400 hidden"></div>
+        </div>
+    </div>
+
+
+    <header class="p-4 flex justify-between items-center">
+        <!-- Logo e Texto "Tutoriais LOBR" -->
+        <div class="flex items-center space-x-2">
+            <img src="https://i.postimg.cc/L6BPvWpZ/download-removebg-preview.png" alt="Logo Tutoriais LOBR" class="h-10 sm:h-12 w-auto">
+            <span class="text-2xl font-bold text-white hidden sm:block">Tutoriais LOBR</span> <!-- Texto visível em desktop -->
+        </div>
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <nav id="mainNav">
+            <ul class="flex space-x-4 nav-links md:flex-row flex-col">
+                <li><a href="#home" onclick="showSection('home')">Início</a></li>
+                <li class="has-submenu relative"> <!-- Item de menu com submenu -->
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event, 'classesSubmenu')" class="flex items-center">
+                        Classes
+                        <!-- Ícone de seta para baixo -->
+                        <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" id="classesArrow">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <ul id="classesSubmenu" class="submenu">
+                        <li><a href="#habilidades" data-class-display="guerreiro" onclick="showSection('habilidades', 'guerreiro')">Guerreiro</a></li>
+                        <li><a href="#habilidades" data-class-display="mago" onclick="showSection('habilidades', 'mago')">Mago</a></li>
+                        <li><a href="#habilidades" data-class-display="arqueiro" onclick="showSection('habilidades', 'arqueiro')">Arqueiro</a></li>
+                        <li><a href="#habilidades" data-class-display="encantador-dragoes" onclick="showSection('habilidades', 'encantador-dragoes')">Encantador de Dragões</a></li>
+                    </ul>
+                </li>
+                <li><a href="#pets" onclick="showSection('pets')">Pets</a></li>
+                <li class="has-submenu relative" id="advancedMenuItem"> <!-- Item de menu com submenu, ID para esconder/mostrar -->
+                    <a href="javascript:void(0)" onclick="toggleSubmenu(event, 'advancedSubmenu')" class="flex items-center">
+                        Avançado
+                        <!-- Ícone de seta para baixo -->
+                        <svg class="w-4 h-4 ml-1 transform transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20" id="advancedArrow">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <ul id="advancedSubmenu" class="submenu">
+                        <li><a href="javascript:void(0)" onclick="/* showSection('titas') */">Titãs (Em Breve)</a></li>
+                        <li><a href="javascript:void(0)" onclick="showSection('potencial')">Potencial/Talismã</a></li>
+                        <li><a href="#esferas" onclick="showSection('esferas')">Esferas Míticas</a></li>
+                    </ul>
+                </li>
+                
+                <li><a href="#dicas" onclick="showSection('dicas')">Dicas e Estratégias</a></li>
+                <li><a href="#videos" onclick="showSection('videos')">Vídeos</a></li>
+                <li><a href="#login" onclick="openLoginModal()">Login</a></li> <!-- Login Button in Header -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- As seções de conteúdo do site, inicialmente escondidas pela splash screen -->
+        <section id="home" class="content-section">
+            <h2 class="text-3xl font-bold mb-6 text-center text-blue-300">Bem-vindo(a) ao Tutoriais LOBR!</h2>
+                <p class="text-lg text-center mb-8 text-gray-300">Seu portal completo de guias e dicas para LEGEND ONLINE BR!</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                    <a href="https://lobr.creaction-network.com/serverlist/" target="_blank" class="action-button">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                        Jogar LEGEND ONLINE BR (PC)
+                    </a>
+                    <a href="https://lobr.creaction-network.com/" target="_blank" class="action-button">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                        Site Oficial do Jogo
+                    </a>
+                    <a href="https://www.youtube.com/@PetaLegend" target="_blank" class="action-button">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm4.5 13.5l-5 3.5V6.5l5 3.5z" clip-rule="evenodd"></path></svg>
+                        Canal no YouTube
+                    </a>
+                </div>
+
+                <h3 class="text-2xl font-bold mb-4 text-blue-300">Adições Recentemente:</h3>
+                <div id="recent-additions-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Cards de Adições Recentemente serão injetados aqui via JavaScript -->
+                </div>
+            </section>
+
+            <!-- Seção Classes (conteúdo dinâmico da classe selecionada) -->
+            <section id="habilidades" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Habilidades de Classe</h2>
+                <div id="class-details-container" class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <!-- Conteúdo dinâmico da classe selecionada será inserido aqui -->
+                    <p class="text-gray-300 text-lg text-center">Selecione uma classe no menu "Classes" para ver seus detalhes e habilidades.</p>
+                </div>
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+            <!-- Seção Genérica de Detalhes de PETs (será preenchida dinamicamente) -->
+            <section id="pet-details-section" class="content-section">
+                <div id="current-pet-details-container" class="bg-gray-800 p-6 rounded-lg flex flex-col items-center">
+                    <h2 class="text-3xl font-bold mb-4 text-blue-300">Detalhes do Pet</h2>
+                    <p class="text-gray-300 text-lg text-center">Selecione um pet na seção "Pets" para ver seus detalhes.</p>
+                </div>
+                <button onclick="showSection('pets')" class="action-button mt-8">Voltar para Pets</button>
+            </section>
+
+
+            <section id="titas" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Titãs</h2>
+                <p class="text-gray-300 mb-6">Descubra tudo sobre os poderosos Titãs em LEGEND ONLINE BR. Como invocá-los, evoluí-los e as habilidades únicas de cada um para fortalecer sua equipe.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <img id="image-tita-guerra-detail" src="https://placehold.co/600x300/3e4c5b/e2e8f0?text=Tita+da+Guerra+Detail" alt="Titã da Guerra Detalhe - Legend Online" loading="lazy">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-200">Guia: Titã da Guerra</h3>
+                        <p class="text-gray-300">Conheça o Titã da Guerra, suas habilidades de ataque e defesa, e como ele pode ser um pilar para seu time em batalhas intensas.</p>
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <img id="image-tita-arcano-detail" src="https://placehold.co/600x300/3e4c5b/e2e8f0?text=Tita+Arcano+Detail" alt="Titã Arcano Detalhe - Legend Online" loading="lazy">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-200">Guia: Titã Arcano</h3>
+                        <p class="text-gray-300">Explore o poder mágico do Titã Arcano. Entenda suas habilidades de suporte e dano mágico que podem virar o jogo.</p>
+                    </div>
+                </div>
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+            <section id="pets" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Habilidades de Pets</h2>
+                <p class="text-gray-300 mb-6">Em Legend Online BR, seus Pets são companheiros essenciais que o auxiliam em combate, oferecendo habilidades e atributos que podem virar o jogo. Eles são divididos em várias categorias, cada uma com pets únicos e papéis específicos.</p>
+
+                <h3 class="sub-section-title">Hierarquia e Tipos de Pets</h3>
+                <p class="text-gray-300 mb-6">Os Pets em Legend Online são classificados em diferentes categorias de poder e funcionalidade. Entender essa hierarquia é crucial para escolher e investir nos melhores companheiros.</p>
+                
+                <!-- Fusões Supremas -->
+                <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-200">1. Fusões Supremas</h4>
+                    <p class="text-gray-300 mb-4">Os Pets de fusão suprema representam o ápice do poder em Legend Online, combinando o poder de várias entidades para se tornarem invencíveis. Eles têm a habilidade de utilizar a Arma Divina e podem ser fortalecidos e evoluídos ainda mais usando pedras de fortalecimento e evolução avançadas, atingindo a elevação suprema ou, como é mais conhecido, o estado de Pet Vermelho (ou Red).</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://i.postimg.cc/B6kvmSjC/thor.gif" alt="Pet Thor" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Thor</h3>
+                                <p>Elemento(s): Fogo, Choque</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'thor')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://i.postimg.cc/XJpJKGYJ/odin.gif" alt="Pet Odin" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Odin</h3>
+                                <p>Elemento(s): Luz, Escuridão</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'odin')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://i.postimg.cc/Pxzdd3BD/2025-06-18-20-38-32-online-video-cutter-com.gif" alt="Pet Frigg" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Frigg</h3>
+                                <p>Elemento(s): Vento, Água</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'frigg')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fusões Normais -->
+                <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-200">2. Fusões Normais</h4>
+                    <p class="text-gray-300 mb-4">Esses Pets de fusão oferecem um grande aumento de poder e são essenciais para o progresso no jogo, sendo a base para as fusões supremas. Assim como as fusões supremas, eles também têm a habilidade de utilizar a Arma Divina.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://i.postimg.cc/XvVS6RM6/tyr.gif" alt="Pet Tyr" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Tyr</h3>
+                                <p>Elemento(s): Choque, Fogo</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'tyr')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://i.postimg.cc/QdgGPXyq/lokey.gif" alt="Pet Lokey" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Lokey</h3>
+                                <p>Elemento(s): Luz, Escuridão</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'lokey')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://i.postimg.cc/yx32TBRc/freya.gif" alt="Pet Freya" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Freya</h3>
+                                <p>Elemento(s): Vento, Água</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'freya')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção da Arma Divina - Posicionada entre Fusões Normais e Pets Supremos -->
+                <div class="divine-weapon-section">
+                    <h3 class="sub-section-title">A Arma Divina</h3>
+                    <p>Uma poderosa ferramenta de combate exclusiva para Pets de Fusão (tanto Normais quanto Supremas). A Arma Divina eleva drasticamente o poder do seu Pet, concedendo-lhe habilidades únicas e atributos aprimorados em batalha. Mais detalhes sobre como obtê-la e fortalecê-la serão abordados em um guia futuro.</p>
+                    <!-- Image of the game interface here -->
+                    <img src="https://i.postimg.cc/Kj43qpcn/arma-divina.gif" alt="Arma Divina GIF" loading="lazy" /> <!-- Corrigido para o URL do GIF da Arma Divina -->
+                    <a href="#divine-weapon-details" onclick="showSection('divine-weapon-details')" class="highlighted-button">Saiba Mais sobre a Arma Divina</a>
+                </div>
+
+                <!-- Pets Supremos (Não Fundidos) -->
+                <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-200">3. Pets Supremos (Não Fundidos)</h4>
+                    <p class="text-gray-300 mb-4">Esses pets são poderosos de alto nível, mas com apenas um elemento predominante, diferentemente das fusões. Eles não podem utilizar habilidades combinadas nem têm acesso à Arma Divina.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Zeus" alt="Pet Zeus" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Zeus</h3>
+                                <p>Elemento: Choque</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'zeus')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Ares" alt="Pet Ares" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Ares</h3>
+                                <p>Elemento: Fogo</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'ares')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Deusa+Colheita" alt="Pet Deusa da Colheita" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Deusa da Colheita</h3>
+                                <p>Elemento: Vento</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'deusa-colheita')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Poseidon" alt="Pet Poseidon" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Poseidon</h3>
+                                <p>Elemento: Água</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'poseidon')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Hera" alt="Pet Hera" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Hera</h3>
+                                <p>Elemento: Luz</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'hera')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Venus" alt="Pet Vênus" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Vênus</h3>
+                                <p>Elemento: Escuridão</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'venus')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pets Divinos (Pré-Fusão) -->
+                <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-200">4. Pets Divinos (Pré-Fusão)</h4>
+                    <p class="text-gray-300 mb-4">Estes pets poderosos são a base para as Fusões Normais e são obtidos em estágios intermediários do jogo.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Hercules" alt="Pet Hércules" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Hércules</h3>
+                                <p>Elemento: Choque</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'hercules')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Kersy" alt="Pet Kersy" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Kersy</h3>
+                                <p>Elemento: Fogo</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'kersy')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Medusa" alt="Pet Medusa" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Medusa</h3>
+                                <p>Elemento: Vento</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'medusa')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Tritao" alt="Pet Tritão" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Tritão</h3>
+                                <p>Elemento: Água</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'tritao')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Gaia" alt="Pet Gaia" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Gaia</h3>
+                                <p>Elemento: Escuridão</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'gaia')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Athena" alt="Pet Athena" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Athena</h3>
+                                <p>Elemento: Luz</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'athena')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pets Básicos -->
+                <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                    <h4 class="text-xl font-semibold mb-4 text-blue-200">5. Pets Básicos (Iniciais)</h4>
+                    <p class="text-gray-300 mb-4">São os primeiros pets que os jogadores obtêm e servem como a base para futuros aprimoramentos e fusões. Embora não tenham os nomes dos outros, são essenciais para o início da jornada.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+1" alt="Pet Básico 1" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Pet Básico de Ataque</h3>
+                                <p>Pet inicial focado em causar dano físico.</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'basic-attack')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+2" alt="Pet Básico 2" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Pet Básico de Defesa</h3>
+                                <p>Pet inicial focado em absorver dano e proteger.</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'basic-defense')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                        <div class="pet-card">
+                            <img class="sprite-gif" src="https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+3" alt="Pet Básico 3" loading="lazy">
+                            <div class="pet-card-content">
+                                <h3>Pet Básico de Suporte</h3>
+                                <p>Pet inicial que oferece habilidades de cura ou buff.</p>
+                                <a href="javascript:void(0)" onclick="showSection('pet-details-section', 'basic-support')" class="view-button">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h3 class="sub-section-title">Aprimorando Habilidades de Pets</h3>
+                <p class="text-gray-300 mb-6">Para maximizar o poder do seu Pet, você deve focar em:</p>
+                <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                    <li><strong>Treinamento:</strong> Use itens de treinamento para aumentar o nível e os atributos básicos do seu Pet.</li>
+                    <li><strong>Evolução (Sintetizar):</strong> Consuma outros Pets ou materiais específicos para evoluir seu Pet para uma qualidade superior (ex: de roxo para laranja), desbloqueando novas habilidades.</li>
+                    <li><strong>Equipamentos Divinos:</strong> Pets podem equipar itens especiais que aprimoram grandemente seu poder de combate.</li>
+                    <li><strong>Almas da Divindade:</strong> Coletar e sintetizar Almas da Divindade de maior nível para purificar e influenciar atributos.</li>
+                    <li><strong>Sinergia com o Herói:</strong> Escolha Pets que complementam as habilidades do seu personagem para criar combos devastadores.</li>
+                </ul>
+
+                <h3 class="sub-section-title">Conselheiro de Pets e Builds ✨</h3>
+                <div class="bg-gray-800 p-6 rounded-lg mb-6">
+                    <p class="text-gray-300 mb-4">Descreva sua classe, estilo de jogo (Ex: DPS, Tanque, Suporte), preferência por PvE ou PvP, e o modelo de IA do Tutoriais LOBR irá sugerir combinações ideais de Pets e Esferas Míticas!</p>
+                    <textarea id="buildAdvisorInput" class="w-full p-3 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:border-blue-500 mb-4" rows="4" placeholder="Ex: Sou Mago, foco em dano mágico e jogo mais PvP. Quero um pet que aumente meu crítico."></textarea>
+                    <button id="generateSuggestionBtn" class="highlighted-button w-full">Obter Sugestão de Pet e Build ✨</button>
+                    <div id="advisorOutput" class="mt-4 p-4 rounded-md bg-gray-900 text-gray-200 whitespace-pre-wrap hidden">
+                        <!-- Resposta do LLM será exibida aqui -->
+                    </div>
+                    <div id="advisorLoading" class="mt-4 text-center text-blue-400 hidden">
+                        Gerando sugestão...
+                        <span class="animate-spin inline-block ml-2">◠</span> <!-- Ícone de carregamento -->
+                    </div>
+                </div>
+                
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+            <!-- Nova Seção: Detalhes da Arma Divina -->
+            <section id="divine-weapon-details" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Detalhes da Arma Divina</h2>
+                <p class="text-gray-300 mb-6">A Arma Divina é um sistema de aprimoramento exclusivo para Pets de Fusão (tanto Normais quanto Supremas). A Arma Divina eleva drasticamente o poder do seu Pet, concedendo-lhe habilidades únicas e atributos aprimorados em batalha. Mais detalhes sobre como obtê-la e fortalecê-la serão abordados em um guia futuro.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-200">Desbloqueio e Aquisição</h3>
+                        <p class="text-gray-300">Para desbloquear a Arma Divina para um Pet de Fusão, você geralmente precisará de materiais específicos obtidos em eventos de tempo limitado, masmorras de alto nível ou lojas especiais. Uma vez desbloqueada, a Arma Divina é vinculada ao Pet e concede bônus imediatos.</p>
+                        <img src="https://i.postimg.cc/Kj43qpcn/arma-divina.gif" alt="Desbloqueio Arma Divina" loading="lazy">
+                    </div>
+                    <div class="bg-gray-800 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-200">Fortalecimento e Habilidades</h3>
+                        <p class="text-gray-300">A Arma Divina pode ser fortalecida usando pedras de aprimoramento e outros recursos. Cada nível de fortalecimento não só aumenta os atributos do Pet, mas também pode desbloquear ou aprimorar habilidades passivas e ativas únicas que afetam o desempenho do Pet em batalha. O processo de fortalecimento pode ser intensivo em recursos, então planeje bem!</p>
+                        <img src="https://i.postimg.cc/Kj43qpcn/arma-divina.gif" alt="Fortalecimento Arma Divina" loading="lazy">
+                    </div>
+                </div>
+                <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4 mb-6">
+                    <li><strong>Recursos Necessários:</strong> Pedras de Forja Divina, Fragmentos Divinos e Essências de Alma são comuns para o aprimoramento.</li>
+                    <li><strong>Efeitos de Batalha:</strong> As habilidades da Arma Divina variam muito; algumas podem causar dano extra, outras aplicar debuffs ou até mesmo curar o seu personagem.</li>
+                    <li><strong>Priorização:</strong> Foque em aprimorar as Armas Divinas dos seus Pets mais usados e que melhor complementam sua classe.</li>
+                </ul>
+                <button onclick="showSection('pets')" class="action-button mt-8">Voltar para Pets</button>
+            </section>
+            <!-- Fim da Nova Seção: Detalhes da Arma Divina -->
+
+            <!-- Seção de Esferas Míticas (adicionada com conteúdo) -->
+            <section id="esferas" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Esferas Míticas</h2>
+                <p class="text-gray-300 mb-6">As Esferas Míticas são artefatos poderosos que, ao serem equipados, concedem bônus significativos aos atributos e habilidades do seu personagem. Combiná-las estrategicamente é crucial para otimizar seu desempenho em batalha. Abaixo, detalhamos alguns tipos importantes:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="tutorial-card">
+                        <img src="https://i.postimg.cc/wBj3K814/Screenshot-1.jpg" alt="Ataque de Meteoro Fúria" loading="lazy">
+                        <div class="tutorial-card-content">
+                            <h3>Lendário Nv.6 - Ataque de Meteoro - Fúria</h3>
+                            <p>Atributos: Ataque:9504, Defesa:9504, Resistência:9504, Vida:57024</p>
+                            <p>Habilidade: Quando lança o Ataque de meteoro, seu dano crítico é aumentado em 25% por 2 turnos.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <img src="https://i.postimg.cc/L58T5nB8/Screenshot-2.jpg" alt="Ataque de Meteoro Rugido" loading="lazy">
+                        <div class="tutorial-card-content">
+                            <h3>Lendário Nv.7 - Ataque de Meteoro - Rugido</h3>
+                            <p>Atributos: Ataque:12096, Defesa:12096, Resistência:12096, Vida:72576</p>
+                            <p>Habilidade: Ao lançar o Ataque de meteoro, o alvo recebe 15% a mais de dano por 2 turnos.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <img src="https://i.postimg.cc/pT3N206J/Screenshot-3.jpg" alt="Corte Sônico Resistência" loading="lazy">
+                        <div class="tutorial-card-content">
+                            <h3>Lendário Nv.6 - Corte Sônico - Resistência</h3>
+                            <p>Atributos: Ataque:9504, Defesa:9504, Resistência:9504, Vida:57024</p>
+                            <p>Habilidade: Ao lançar Corte sônico, você tem 50% de chance de aumentar em 30% o dano do crítico por 2 turnos.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <img src="https://i.postimg.cc/mkH2w04x/Screenshot-4.jpg" alt="Corte Sônico Supressão" loading="lazy">
+                        <div class="tutorial-card-content">
+                            <h3>Lendário Nv.6 - Corte Sônico - Supressão</h3>
+                            <p>Atributos: Ataque:9504, Defesa:9504, Resistência:9504, Vida:57024</p>
+                            <p>Habilidade: Ao lançar Corte sônico, o alvo tem 50% de chance de receber aumento de dano de 10% por 2 turnos.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <img src="https://i.postimg.cc/j2P7T05R/Screenshot-5.jpg" alt="Raio Explosivo Ataque Fulminante" loading="lazy">
+                        <div class="tutorial-card-content">
+                            <h3>Lendário Nv.6 - Raio Explosivo - Ataque Fulminante</h3>
+                            <p>Atributos: Ataque:9504, Defesa:9504, Resistência:9504, Vida:57024</p>
+                            <p>Habilidade: Quando Raio explosivo é lançado, sua taxa de crítico aumenta em 10% por 2 rodadas.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-card">
+                        <img src="https://i.postimg.cc/MGk01F9h/Screenshot-28.jpg" alt="Raio Explosivo Sagrado" loading="lazy">
+                        <div class="tutorial-card-content">
+                            <h3>Lendário Nv.5 - Raio Explosivo - Sagrado</h3>
+                            <p>Atributos: Ataque:7200, Defesa:7200, Resistência:7200, Vida:43200</p>
+                            <p>Habilidade: Quando Raio explosivo é lançado, todos recuperam 8% de vida por 2 turnos.</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+
+            <section id="trancanivel" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Tranca Nível</h2>
+                <p class="text-gray-300 mb-6">Esta seção explicará como funciona a Tranca Nível em Legend Online BR, um sistema importante para o avanço do seu personagem e acesso a novos conteúdos.</p>
+                <!-- Conteúdo da Tranca Nível será adicionado aqui futuramente -->
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+            <section id="dicas" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Dicas e Estratégias</h2>
+                <p class="text-gray-300 mb-6">Seja você um novato ou um veterano, nossas dicas e estratégias avançadas te ajudarão a superar desafios e otimizar sua jogatina em LEGEND ONLINE BR.</p>
+                <ul class="list-disc list-inside text-gray-300 space-y-3 pl-4">
+                    <li>Melhores formas de farmar gold e itens raros.</li>
+                    <li>Estratégias para derrotar chefes de raide e masmorras.</li>
+                    <li>Dicas de PvP: como montar seu time e quais táticas usar.</li>
+                    <li>Otimização de tempo: aproveite ao máximo seu jogo diário.</li>
+                    <li>Eventos sazonais: como participar e ganhar recompensas exclusivas.</li>
+                </ul>
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+            <section id="videos" class="content-section">
+                <h2 class="text-3xl font-bold mb-4 text-blue-300">Vídeos Exclusivos</h2>
+                <p class="text-gray-300 mb-6">Assista aos nossos vídeos com gameplay comentado, tutoriais visuais e análises de conteúdo exclusivo para LEGEND ONLINE BR!</p>
+                <div id="video-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Vídeos serão injetados aqui via JavaScript -->
+                </div>
+                <button onclick="showSection('home')" class="action-button mt-8">Voltar para Início</button>
+            </section>
+
+        </main>
+
+        <footer class="mt-auto">
+            <p>© 2025 Tutoriais LOBR. Todos os direitos reservados. LEGEND ONLINE BR ™ é uma marca registrada de seus respectivos proprietários.</p>
+        </footer>
+
+        <!-- Mute Button -->
+        <button id="muteButton" title="Ativar/Desativar Música">
+            🔊 <!-- Speaker icon -->
+        </button>
+
+        <script>
+            const audio = new Audio('https://audio.jukehost.co.uk/Mviib3xfTNiSWVFl77YMsk8UDFUelZ9l'); // Seu som de level up
+            const backgroundMusic = document.getElementById('background-music'); // Get the audio element
+            const muteButton = document.getElementById('muteButton');
+
+            // Estado global para armazenar a escolha do nível do usuário
+            let userLevelChoice = localStorage.getItem('userLevelChoice'); // Carrega a escolha ao iniciar
+            let userClassChoice = localStorage.getItem('userClassChoice'); // Carrega a escolha da classe ao iniciar
+
+            // Objeto de dados para detalhes de classes
+            const classDetails = {
+                'guerreiro': {
+                    '80avanco': {
+                        image: "https://i.postimg.cc/DfdG2Nmy/1467620928.png", // Imagem do Guerreiro
+                        title: "Guia Completo: Habilidades do Guerreiro (80 Avanço)",
+                        description: "Aprenda a dominar o campo de batalha com o Guerreiro em nível de avanço. Este guia cobre habilidades, talentos e estratégias avançadas para maximizar seu potencial ofensivo e defensivo em níveis mais altos. Explore as melhores combinações de equipamentos e táticas para se tornar uma força imparável no campo de batalha."
+                    },
+                    'tranca-nivel': {
+                        image: "https://i.postimg.cc/DfdG2Nmy/1467620928.png", // Imagem do Guerreiro
+                        title: "Guia Completo: Habilidades do Guerreiro (Tranca Nível)",
+                        description: "Domine o Guerreiro no modo Tranca Nível! Este guia foca em builds defensivas e maximização de sobrevivência, permitindo que você seja o pilar de sua equipe mesmo sem o avanço de nível completo. Descubra como usar suas habilidades para controlar inimigos e proteger aliados, otimizando cada ponto de atributo disponível."
+                    }
+                },
+                'mago': {
+                    '80avanco': {
+                        image: "https://i.postimg.cc/sxcGwBhZ/1467620824.png", // Imagem do Mago
+                        title: "Guia Completo: Habilidades do Mago (80 Avanço)",
+                        description: "Desencadeie o poder arcano do Mago em nível de avanço (80 Avanço). Descubra os feitiços mais devastadores, combos eficientes e como controlar seus inimigos com maestria mágica. Este guia explora as sinergias de habilidades avançadas, os melhores equipamentos e pets para maximizar seu dano e controle em PvE e PvP, utilizando todo o potencial disponível em níveis superiores."
+                    },
+                    'tranca-nivel': {
+                        image: "https://i.postimg.cc/sxcGwBhZ/1467620824.png", // Imagem do Mago
+                        title: "Guia Completo: Habilidades do Mago (Tranca Nível)",
+                        description: "Conheça o Mago na Tranca Nível. Maximize seu controle de multidão e dano sustentado neste guia focado na estratégia de permanência e na otimização de recursos limitados. Aprenda as melhores rotações de feitiços para garantir sua sobrevivência e utilidade em combates prolongados, priorizando defesas e habilidades que não dependem de grandes investimentos em atributos avançados."
+                    }
+                },
+                'arqueiro': {
+                    '80avanco': {
+                        image: "https://i.postimg.cc/qMJ3gGPc/1467620870.png", // Imagem do Arqueiro
+                        title: "Guia Completo: Habilidades do Arqueiro (80 Avanço)",
+                        description: "Aprenda as táticas de longo alcance do Arqueiro em avanço (80 Avanço). Domine a precisão e o dano explosivo para abater seus inimigos de longe. Este guia oferece conselhos sobre o posicionamento ideal, a seleção de flechas especiais e a otimização de seus talentos para se tornar um mestre atirador, essencial em qualquer batalha."
+                    },
+                    'tranca-nivel': {
+                        image: "https://i.postimg.cc/qMJ3gGPc/1467620870.png", // Imagem do Arqueiro
+                        title: "Guia Completo: Habilidades do Arqueiro (Tranca Nível)",
+                        description: "Otimize seu Arqueiro para a Tranca Nível. Este guia oferece estratégias para maximizar seu dano e controle em combates prolongados, com foco em habilidades de controle de multidão e sobrevivência. Descubra como manter a distância e usar armadilhas para superar inimigos mais fortes, adaptando-se às limitações do nível."
+                    }
+                },
+                'encantador-dragoes': { // This is the 'locked' class for 'tranca-nivel'
+                    '80avanco': {
+                        image: "https://i.postimg.cc/GmNKkNrn/dragonchant.png", // Imagem do Encantador de Dragões
+                        title: "Guia Completo: Habilidades do Encantador de Dragões (80 Avanço)",
+                        description: "Domine os dragões e seu poder em avanço (80 Avanço). Este guia completo revela os segredos para invocar, treinar e controlar estas poderosas feras, utilizando suas habilidades únicas para devastar seus inimigos e proteger seus aliados. Aprenda as melhores estratégias para sincronizar seus ataques com os de seus dragões para dominar o campo de batalha."
+                    },
+                    'tranca-nivel': { // This will be the locked one. Its content won't actually be displayed if locked.
+                        image: "https://placehold.co/600x300/ef4444/ffffff?text=CLASSE+BLOQUEADA",
+                        title: "Encantador de Dragões (Classe Bloqueada)",
+                        description: "Esta classe está bloqueada para o modo Tranca Nível. Para acessar o conteúdo do Encantador de Dragões, selecione o modo '80 Avanço'."
+                    }
+                }
+            };
+
+            // Objeto de dados para detalhes de pets (incluindo habilidades ativas e passivas por nível)
+            const petSkills = {
+                'thor': {
+                    'tranca-nivel': {
+                        main_image: "https://i.postimg.cc/ZRYygg90/Screenshot-13.jpg", // Imagem do Thor Tranca Nível
+                        intro: "Aqui estão as habilidades mais importantes para o Thor no modo Tranca Nível, focadas em otimizar seu desempenho sem acesso à Arma Divina. Como o Tranca Nível não tem acesso à Arma Divina do Thor, a Benção de Hefesto é uma boa habilidade. As habilidades listadas são as recomendadas para este modo.",
+                        active_skills: [
+                            { name: "Chamas do Inferno", cooldown: "10 segundos", description: "Causa 270% de danos a um inimigo aleatório e aumenta em 10% o dano causado ao alvo por 3 turnos." },
+                            { name: "Choque em Cadeia", cooldown: "15 segundos", description: "Causa 187% de danos a um inimigo e aumenta em 15% os danos recebidos pelo alvo por 2 turnos." },
+                            { name: "Ex. Beijo da Destruição", cooldown: "45 segundos", description: "Consumindo 500 pontos de despertamento, causa 315% de danos a todos os inimigos." },
+                            { name: "Benção de Hefesto", cooldown: "45 segundos", description: "Gastando 500 Pontos de Despertamento para aumentar seu dano em 60% por 3 turnos." },
+                            { name: "Ex. Grito do Leão", cooldown: "45 segundos", description: "Consumindo 500 pontos de despertamento, causa 570% de danos a um inimigo aleatório e aumenta seu próprio dano em 20% por 2 turnos." }
+                        ],
+                        passive_skills: [
+                            { name: "Poder das Lavas", description: "Sempre que atacar, aumenta 5% de danos por 5 turnos, o efeito pode ser sobreposto até 20 camadas." },
+                            { name: "Fogo da Graça Divina", description: "Aumenta dano em 15%." },
+                            { name: "Energia Acumulada", description: "Ao receber ataque, aumenta 5% dos danos recebidos, durante 2 turnos. Pode ser acumulado 10 camadas." }
+                        ],
+                        outro: "O Thor na versão Tranca Nível não possui a Arma Divina, por isso a Benção de Hefesto e mais de uma habilidade que consome despertamento podem ser utilizados para sobrepor essa limitação, focando em dano explosivo e controle mesmo sem o acesso total ao despertar de poder."
+                    },
+                    '80avanco': {
+                        main_image: "https://i.postimg.cc/A2C355D9-8FF5-48A2-A725-1BFDFBFB71D5.png", // Imagem do Thor 80 Avanço
+                        intro: "Thor é um Pet de Fusão Suprema, resultado da combinação de Zeus (Choque) e Ares (Fogo). Ele se destaca por seu imenso poder ofensivo, capaz de causar dano devastador com habilidades que combinam os elementos de fogo e choque. Ideal para jogadores que buscam maximizar o dano e controlar o campo de batalha com ataques em área e explosivos. Thor também pode utilizar a Arma divina (<a href=\"#divine-weapon-details\" onclick=\"showSection('divine-weapon-details')\">Arma divina</a>), elevando ainda mais seu potencial de combate.",
+                        active_skills: [
+                            { name: "Ex. Beijo da Destruição", cooldown: "45 segundos", description: "Consumindo 500 pontos de despertamento, causa 315% de danos a todos os inimigos." },
+                            { name: "Ex. Grito do Leão", cooldown: "45 segundos", description: "Consumindo 500 pontos de despertamento, causa 570% de danos a um inimigo aleatório e aumenta seu próprio dano em 20% por 2 turnos." },
+                            { name: "Punição Divina", cooldown: "30 segundos", description: "Causa 275% de danos a um inimigo aleatório (prioritário selecionar jogador), com 100% de chance de que duas de suas habilidades não funcione por 2 turnos. Habilidade crucial para o Thor avanço." },
+                            { name: "EX. Domínio dos Trovões", cooldown: "45 segundos", description: "Consumir 500 Pontos de Despertamento e causará 470% de danos a um alvo aleatório." }
+                        ],
+                        passive_skills: [
+                            { name: "Choque da Graça Divina", description: "Sempre que for atacado, tem 10% de chance de recuperar 20% de sangue máximo." },
+                            { name: "Energia Acumulada", description: "Ao receber ataque, aumenta 5% dos danos recebidos, durante 2 turnos. Pode ser acumulado 10 camadas." },
+                            { name: "Poder das Lavas", description: "Sempre que atacar, aumenta 5% de danos por 5 turnos, o efeito pode ser sobreposto até 20 camadas." }
+                        ],
+                        outro: "O Thor na versão Avanço, especialmente com a Arma Divina que dobra o dano por 2 turnos, deve ser usado para finalizar a luta em um único ataque. Tendo em vista que pets avançados não duram tanto no estado de despertar (o pet em uso) como um Tranca Nível, as habilidades são puramente feitas para 'hitkill' (matar com um ataque tudo ou nada) e a passiva de cura ajuda no *Portal do Tempo*."
+                    }
+                },
+                'frigg': {
+                    'tranca-nivel': {
+                        main_image: "https://i.postimg.cc/jSjbCYWR/Screenshot-15.jpg",
+                        intro: "A Frigg no modo Tranca Nível é um pet com dano baixo e menos resistente ao dano, porém suas habilidades fazem com que a mesma brilhe em lutas com porcentagens altas, onde ela dura mais e também o seu dano é multiplicado muito. O foco de um jogador Tranca Nível com a Frigg seria defender seus amigos ou defender seu guardião, para que assim numa porcentagem alta ela brilhe ainda mais com o dano e o seu guardião dando suporte. Ela é recomendada para a classe Guerreiro, utilizando um guardião com escudos.",
+                        active_skills: [
+                            { name: "Maremoto Destruidor", cooldown: "15 segundos", description: "Causa 195% de danos a todos os inimigos e purifica um estado negativo do integrante de sua equipe." },
+                            { name: "Saquear", cooldown: "45 segundos", description: "Causa 280% de danos a todos os inimigos e diminui 500 Pontos de Despertamento do inimigo. Ao mesmo tempo será adicionado 500 pontos de despertamento aos seus membros de equipe." },
+                            { name: "Flecha de Gelo", cooldown: "25 segundos", description: "Causa 300% de danos a um inimigo com menor número de sangue." },
+                            { name: "Hidro Tratamento", cooldown: "15 segundos", description: "Recupera 135% de Sangue perdido básico ao membro com porcentagem de sangue mais baixa." },
+                            { name: "Ex. Escudo de Água Dourada", cooldown: "60 segundos", description: "Consumindo 500 pontos de despertamento, obterá um escudo equivalente a aumento de 40% de sangue, a todos os seus membros, durante 3 turnos. Não pode ser dispersado." }
+                        ],
+                        passive_skills: [
+                            { name: "Alma da Água", description: "A cada 3 segundos o personagem transformado perde 30 Pontos de Despertamento;" },
+                            { name: "Elegância do Vento", description: "Os pontos de despertamento diminuirão em 20% no estado de transformação" },
+                            { name: "Água Firme", description: "Ao receber ataque tem 20% de chance de recuperar 20% do limite de sangue." }
+                        ],
+                        outro: ""
+                    },
+                    '80avanco': {
+                        main_image: "https://i.postimg.cc/C1grBbvb/Screenshot-16.jpg",
+                        intro: "As habilidades da Frigg na versão Avanço são focadas em maximizar a redução de dano e a eficácia em combate. Com a Arma Divina, a Frigg se torna praticamente invulnerável por 2 turnos, priorizando habilidades de redução de dano em vez de escudos tradicionais, para complementar essa forte defesa.",
+                        active_skills: [
+                            { name: "Maremoto Destruidor", cooldown: "15 segundos", description: "Causa 195% de danos a todos os inimigos e purifica um estado negativo do integrante de sua equipe." },
+                            { name: "Saquear", cooldown: "45 segundos", description: "Causa 280% de danos a todos os inimigos e diminui 500 Pontos de Despertamento do inimigo. Ao mesmo tempo será adicionado 500 pontos de despertamento aos seus membros de equipe." },
+                            { name: "Flecha de Gelo", cooldown: "25 segundos", description: "Causa 300% de danos a um inimigo com menor número de sangue." },
+                            { name: "Bênção de Éolo", cooldown: "45 segundos", description: "Gastando 500 Pontos de Despertamento para que o dano recebido diminua em 60% por 3 turnos, não pode ser dispersado." }
+                        ],
+                        passive_skills: [
+                            { name: "Alma da Água", description: "A cada 3 segundos o personagem transformado perde 30 Pontos de Despertamento;" },
+                            { name: "Elegância do Vento", description: "Os pontos de despertamento diminuirão em 20% no estado de transformação" },
+                            { name: "Sussurro do Vento", description: "Ao ser atacado seu Crítico aumenta em 10% por 2 turnos, podendo acumular 5 vezes." }
+                        ],
+                        outro: "A versão Avanço da Frigg, combinada com a Arma Divina que concede um escudo de 75% de defesa, a torna praticamente invulnerável por 2 turnos. Por isso, em vez de escudos, suas habilidades e passivas focam em redução de dano para complementar essa invulnerabilidade e permitir que ela brilhe ainda mais em combates prolongados."
+                    }
+                },
+                'odin': {
+                    '80avanco': {
+                        main_image: "https://i.postimg.cc/XJpJKGYJ/odin.gif",
+                        intro: "Odin é um Pet de Fusão Suprema que une os poderes de Luz e Escuridão, oferecendo um equilíbrio entre suporte e dano. Este guia abordará as habilidades mais importantes para o modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://i.postimg.cc/XJpJKGYJ/odin.gif",
+                        intro: "Odin no modo Tranca Nível foca em suporte e controle, essencial para manter a equipe viva e desabilitar inimigos, mesmo sem acesso a habilidades avançadas da Arma Divina.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'tyr': {
+                    // Tyr copies skills from Thor
+                    '80avanco': {
+                        main_image: "https://i.postimg.cc/XvVS6RM6/tyr.gif",
+                        intro: "Tyr é uma Fusão Normal ligada ao Thor. Suas habilidades se baseiam nas de Thor, com foco em dano de Fogo e Choque. Em 80 Avanço, Tyr é focado em um estilo de jogo agressivo e de alto dano, sendo ideal para finalizações rápidas em combate.",
+                        active_skills: [], // Copied from Thor 80avanco during initialization
+                        passive_skills: [], // Copied from Thor 80avanco during initialization
+                        outro: "Assim como seu sucessor Thor, Tyr em 80 Avanço é focado em um estilo de jogo agressivo e de alto dano, sendo ideal para finalizações rápidas em combate."
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://i.postimg.cc/XvVS6RM6/tyr.gif",
+                        intro: "Tyr é uma Fusão Normal ligada ao Thor. Suas habilidades se baseiam nas de Thor, com foco em dano de Fogo e Choque. No Tranca Nível, Tyr oferece um bom equilíbrio entre dano e controle, sendo uma ótima opção para manter a pressão em lutas mais longas.",
+                        active_skills: [], // Copied from Thor tranca-nivel during initialization
+                        passive_skills: [], // Copied from Thor tranca-nivel during initialization
+                        outro: "No modo Tranca Nível, o Tyr mantém a capacidade de causar bom dano e aplicar debuffs, sendo um pet versátil para diversas situações de combate."
+                    }
+                },
+                'lokey': {
+                    // Lokey is linked to Odin. For now, it's a placeholder.
+                    '80avanco': {
+                        main_image: "https://i.postimg.cc/QdgGPXyq/lokey.gif",
+                        intro: "Lokey é uma Fusão Normal ligada ao Odin. Suas habilidades se baseiam nas de Odin, com foco em Luz e Escuridão. Mais detalhes sobre suas habilidades virão em breve.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://i.postimg.cc/QdgGPXyq/lokey.gif",
+                        intro: "Lokey é uma Fusão Normal ligada ao Odin. Suas habilidades se baseiam nas de Odin, com foco em Luz e Escuridão. Mais detalhes sobre suas habilidades virão em breve.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'freya': {
+                    // Freya is linked to Frigg.
+                    '80avanco': {
+                        main_image: "https://i.postimg.cc/yx32TBRc/freya.gif",
+                        intro: "Freya é uma Fusão Normal ligada à Frigg. Suas habilidades se baseiam nas de Frigg, com foco em Vento e Água. Em 80 Avanço, ela oferece um controle de grupo poderoso e sustentabilidade.",
+                        active_skills: [], // Copied from Frigg 80avanco during initialization
+                        passive_skills: [], // Copied from Frigg 80avanco during initialization
+                        outro: "No modo 80 Avanço, a Freya é uma excelente controladora de campo de batalha, garantindo a segurança de sua equipe e desgastando os inimigos com suas habilidades elementais."
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://i.postimg.cc/yx32TBRc/freya.gif",
+                        intro: "Freya é uma Fusão Normal ligada à Frigg. Suas habilidades se baseiam nas de Frigg, com foco em Vento e Água. No Tranca Nível, ela se destaca na defesa e recuperação para a equipe.",
+                        active_skills: [], // Copied from Frigg tranca-nivel during initialization
+                        passive_skills: [], // Copied from Frigg tranca-nivel during initialization
+                        outro: "A Freya no Tranca Nível é crucial para a sobrevivência da equipe, utilizando suas habilidades para proteger aliados e garantir que as lutas se prolonguem a seu favor."
+                    }
+                },
+                'zeus': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Zeus",
+                        intro: "Detalhes das habilidades do Zeus no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Zeus",
+                        intro: "Detalhes das habilidades do Zeus no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'ares': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Ares",
+                        intro: "Detalhes das habilidades do Ares no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Ares",
+                        intro: "Detalhes das habilidades do Ares no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'deusa-colheita': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Deusa+Colheita",
+                        intro: "Detalhes das habilidades da Deusa da Colheita no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Deusa+Colheita",
+                        intro: "Detalhes das habilidades da Deusa da Colheita no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'poseidon': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Poseidon",
+                        intro: "Detalhes das habilidades do Poseidon no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Poseidon",
+                        intro: "Detalhes das habilidades do Poseidon no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'hera': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Hera",
+                        intro: "Detalhes das habilidades da Hera no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Hera",
+                        intro: "Detalhes das habilidades da Hera no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'venus': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Vênus",
+                        intro: "Detalhes das habilidades da Vênus no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Vênus",
+                        intro: "Detalhes das habilidades da Vênus no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'hercules': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Hercules",
+                        intro: "Detalhes das habilidades do Hércules no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Hercules",
+                        intro: "Detalhes das habilidades do Hércules no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'kersy': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Kersy",
+                        intro: "Detalhes das habilidades do Kersy no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Kersy",
+                        intro: "Detalhes das habilidades do Kersy no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'medusa': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Medusa",
+                        intro: "Detalhes das habilidades da Medusa no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Medusa",
+                        intro: "Detalhes das habilidades da Medusa no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'tritao': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Tritao",
+                        intro: "Detalhes das habilidades do Tritão no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Tritao",
+                        intro: "Detalhes das habilidades do Tritão no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'gaia': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Gaia",
+                        intro: "Detalhes das habilidades da Gaia no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Gaia",
+                        intro: "Detalhes das habilidades da Gaia no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'athena': {
+                    '80avanco': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Athena",
+                        intro: "Detalhes das habilidades da Athena no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': {
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Athena",
+                        intro: "Detalhes das habilidades da Athena no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'basic-attack': {
+                    '80avanco': { // Placeholder for 80 Avanço basic
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+1",
+                        intro: "Detalhes das habilidades do Pet Básico de Ataque no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': { // Placeholder for Tranca Nível basic
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+1",
+                        intro: "Detalhes das habilidades do Pet Básico de Ataque no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'basic-defense': {
+                    '80avanco': { // Placeholder for 80 Avanço basic
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+2",
+                        intro: "Detalhes das habilidades do Pet Básico de Defesa no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': { // Placeholder for Tranca Nível basic
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+2",
+                        intro: "Detalhes das habilidades do Pet Básico de Defesa no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                },
+                'basic-support': {
+                    '80avanco': { // Placeholder for 80 Avanço basic
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+3",
+                        intro: "Detalhes das habilidades do Pet Básico de Suporte no modo 80 Avanço.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    },
+                    'tranca-nivel': { // Placeholder for Tranca Nível basic
+                        main_image: "https://placehold.co/400x200/3e4c5b/e2e8f0?text=Pet+Basico+3",
+                        intro: "Detalhes das habilidades do Pet Básico de Suporte no modo Tranca Nível.",
+                        active_skills: [], passive_skills: [], outro: ""
+                    }
+                }
+            };
+
+            // Copiar habilidades de Thor para Tyr
+            if (petSkills.thor && petSkills.tyr) {
+                petSkills.tyr['80avanco'].active_skills = [...petSkills.thor['80avanco'].active_skills];
+                petSkills.tyr['80avanco'].passive_skills = [...petSkills.thor['80avanco'].passive_skills];
+                petSkills.tyr['tranca-nivel'].active_skills = [...petSkills.thor['tranca-nivel'].active_skills];
+                petSkills.tyr['tranca-nivel'].passive_skills = [...petSkills.thor['tranca-nivel'].passive_skills];
+            }
+
+            // Copiar habilidades de Frigg para Freya
+            if (petSkills.frigg && petSkills.freya) {
+                petSkills.freya['80avanco'].active_skills = [...petSkills.frigg['80avanco'].active_skills];
+                petSkills.freya['80avanco'].passive_skills = [...petSkills.frigg['80avanco'].passive_skills];
+                petSkills.freya['tranca-nivel'].active_skills = [...petSkills.frigg['tranca-nivel'].active_skills];
+                petSkills.freya['tranca-nivel'].passive_skills = [...petSkills.frigg['tranca-nivel'].passive_skills];
+            }
+
+
+            // Função para atualizar o ícone do botão de mute
+            function updateMuteButtonIcon() {
+                if (backgroundMusic.muted) {
+                    muteButton.innerHTML = '🔇'; // Muted speaker icon
+                } else {
+                    muteButton.innerHTML = '🔊'; // Speaker icon
+                }
+            }
+
+            // Listener para o botão de mute
+            muteButton.addEventListener('click', () => {
+                backgroundMusic.muted = !backgroundMusic.muted;
+                updateMuteButtonIcon();
+                // Salvar a preferência de mudo para o localStorage
+                localStorage.setItem('isMuted', backgroundMusic.muted);
+            });
+
+            // Funções do Modal de Login/Registro
+            const loginModal = document.getElementById('loginModal');
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const loginMessage = document.getElementById('loginMessage');
+
+            function openLoginModal() {
+                loginModal.classList.remove('hidden');
+                loginMessage.classList.add('hidden'); // Clear any previous messages
+                showLoginForm(); // Default to login form
+            }
+
+            function closeLoginModal() {
+                loginModal.classList.add('hidden');
+            }
+
+            function showRegisterForm() {
+                loginForm.classList.add('hidden');
+                registerForm.classList.remove('hidden');
+                loginMessage.classList.add('hidden');
+            }
+
+            function showLoginForm() {
+                loginForm.classList.remove('hidden');
+                registerForm.classList.add('hidden');
+                loginMessage.classList.add('hidden');
+            }
+
+            function forgotPassword() {
+                const email = document.getElementById('loginEmail').value;
+                if (email) {
+                    // In a real application, you would send a password reset email here.
+                    // For this example, we'll just show a message.
+                    loginMessage.textContent = `Um link de recuperação de senha foi enviado para ${email}. (Funcionalidade simulada)`;
+                    loginMessage.classList.remove('hidden', 'text-red-400');
+                    loginMessage.classList.add('text-green-400');
+                } else {
+                    loginMessage.textContent = 'Por favor, insira seu email para recuperar a senha.';
+                    loginMessage.classList.remove('hidden', 'text-green-400');
+                    loginMessage.classList.add('text-red-400');
+                }
+            }
+
+            // Mock login/register (replace with real backend calls)
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                // Basic validation and simulated login
+                if (email && password) {
+                    // In a real app, send to backend for authentication
+                    loginMessage.textContent = `Login de ${email} bem-sucedido! (Funcionalidade simulada)`;
+                    loginMessage.classList.remove('hidden', 'text-red-400');
+                    loginMessage.classList.add('text-green-400');
+                    // Store user state or token if login is real
+                    // localStorage.setItem('loggedInUser', email);
+                    // setTimeout(closeLoginModal, 1500); // Close modal after a short delay
+                } else {
+                    loginMessage.textContent = 'Por favor, insira email e senha.';
+                    loginMessage.classList.remove('hidden', 'text-green-400');
+                    loginMessage.classList.add('text-red-400');
+                }
+            });
+
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    loginMessage.textContent = 'As senhas não coincidem.';
+                    loginMessage.classList.remove('hidden', 'text-green-400');
+                    loginMessage.classList.add('text-red-400');
+                    return;
+                }
+                if (email && password) {
+                    // In a real app, send to backend for user creation
+                    loginMessage.textContent = `Conta para ${email} criada com sucesso! (Funcionalidade simulada)`;
+                    loginMessage.classList.remove('hidden', 'text-red-400');
+                    loginMessage.classList.add('text-green-400');
+                    // setTimeout(showLoginForm, 1500); // Switch to login form
+                } else {
+                    loginMessage.textContent = 'Por favor, preencha todos os campos.';
+                    loginMessage.classList.remove('hidden', 'text-green-400');
+                    loginMessage.classList.add('text-red-400');
+                }
+            });
+
+
+            // Função genérica para alternar a visibilidade de submenus e girar setas
+            function toggleSubmenu(event, submenuId) {
+                event.preventDefault(); // Impede o comportamento padrão do link
+                const submenu = document.getElementById(submenuId);
+                const arrow = event.currentTarget.querySelector('svg'); // Encontra a seta dentro do botão clicado
+
+                // Fecha outros submenus abertos (se houver)
+                document.querySelectorAll('.submenu.active').forEach(openSubmenu => {
+                    if (openSubmenu.id !== submenuId) {
+                        openSubmenu.classList.remove('active');
+                        // Garante que a seta do submenu anterior volte ao normal
+                        const prevArrow = openSubmenu.previousElementSibling ? openSubmenu.previousElementSibling.querySelector('svg') : null;
+                        if (prevArrow) {
+                            prevArrow.classList.remove('rotate-180');
+                        }
+                    }
+                });
+
+                submenu.classList.toggle('active');
+                if (arrow) { // Adicionado verificação de nulidade
+                    arrow.classList.toggle('rotate-180'); // Gira a seta
+                }
+            }
+
+            // Função para mostrar a seção de conteúdo selecionada e esconder as outras
+            function showSection(sectionId, contentIdentifier = userClassChoice) { 
+                console.log("Attempting to show section:", sectionId); // Debugging log
+
+                // Esconde todas as seções de conteúdo
+                const sections = document.querySelectorAll('.content-section');
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Lógica especial para a seção de habilidades (classes)
+                if (sectionId === 'habilidades') {
+                    renderClassDetails(contentIdentifier); // Pass the class to render
+                    const habilidadesSection = document.getElementById('habilidades');
+                    if (habilidadesSection) {
+                        habilidadesSection.classList.add('active'); // Ativa a seção principal de habilidades
+                    }
+                } else if (sectionId === 'pet-details-section') {
+                    renderPetDetails(contentIdentifier);
+                    const petDetailsSection = document.getElementById('pet-details-section');
+                    if (petDetailsSection) {
+                        petDetailsSection.classList.add('active');
+                    }
+                } else if (sectionId === 'videos') { // Nova lógica para a seção de vídeos
+                    renderVideos();
+                    const videoSection = document.getElementById('videos');
+                    if (videoSection) {
+                        videoSection.classList.add('active');
+                    }
+                } else if (sectionId === 'esferas') { // Lógica para a seção de Esferas Míticas
+                    // No need to call a special render function if content is static HTML.
+                    // If content was dynamic, we would call renderSpheres(contentIdentifier);
+                    const esferasSection = document.getElementById('esferas');
+                    if (esferasSection) {
+                        esferasSection.classList.add('active');
+                    }
+                }
+                else {
+                    // Tenta encontrar a seção alvo e ativá-la
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    } else {
+                        console.error(`Erro: Seção com ID '${sectionId}' não encontrada. Voltando para 'home'.`);
+                        // Fallback para a página inicial se a seção não for encontrada
+                        const homeSection = document.getElementById('home');
+                        if (homeSection) {
+                            homeSection.classList.add('active');
+                        }
+                        return;
+                    }
+                }
+
+                // Fecha o menu hamburguer em dispositivos móveis após a seleção
+                const mainNav = document.getElementById('mainNav');
+                if (mainNav && mainNav.classList.contains('active')) {
+                    mainNav.classList.remove('active');
+                }
+                // Fecha todos os submenus abertos (desktop e mobile)
+                document.querySelectorAll('.submenu.active').forEach(openSubmenu => {
+                    openSubmenu.classList.remove('active');
+                    const arrow = openSubmenu.previousElementSibling ? openSubmenu.previousElementSibling.querySelector('svg') : null;
+                    if (arrow) {
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+
+                // Esconde a splash screen se estiver visível e a seção é diferente da splash
+                const splashScreen = document.getElementById('splash-screen');
+                if (splashScreen) { // Apenas esconde a splash inicial se ela ainda estiver ativa
+                    splashScreen.classList.add('hidden');
+                }
+                const levelSplashScreen = document.getElementById('level-splash-screen');
+                if (levelSplashScreen) { // Apenas esconde a splash de nível se ela ainda estiver activa
+                    levelSplashScreen.classList.add('hidden');
+                }
+            }
+
+            // Listener para o botão de toggle do menu (hambúrguer) em dispositivos móvel (re-confirmado)
+            document.getElementById('menuToggle').addEventListener('click', () => {
+                const mainNav = document.getElementById('mainNav');
+                if (mainNav) {
+                    mainNav.classList.toggle('active');
+                }
+                // Fecha todos os submenus ao abrir/fechar o menu principal em mobile
+                document.querySelectorAll('.submenu.active').forEach(openSubmenu => {
+                    openSubmenu.classList.remove('active');
+                    const arrow = openSubmenu.previousElementSibling ? openSubmenu.previousElementSibling.querySelector('svg') : null;
+                    if (arrow) {
+                        arrow.classList.remove('rotate-180');
+                    }
+                });
+            });
+
+            // Função para esconder a splash screen inicial e mostrar a de nível
+            function hideInitialSplashScreen(classChoice) {
+                const splashScreen = document.getElementById('splash-screen');
+                const levelSplashScreen = document.getElementById('level-splash-screen');
+                const loadingOverlay = document.getElementById('loading-overlay'); // Added loading overlay reference
+
+                if (splashScreen && levelSplashScreen) {
+                    audio.play().catch(e => console.error("Erro ao reproduzir som:", e));
+                    // Tenta tocar a música de fundo
+                    backgroundMusic.play().catch(e => console.log("Autoplay de música bloqueado pelo navegador após interação:", e));
+
+                    userClassChoice = classChoice; // Armazena a classe escolhida
+                    localStorage.setItem('userClassChoice', userClassChoice); // Salva no localStorage
+
+                    splashScreen.classList.add('hidden');
+
+                    // If Encantador de Dragões is chosen, set level to 80avanco and skip level splash
+                    if (classChoice === 'encantador-dragoes') {
+                        userLevelChoice = '80avanco';
+                        localStorage.setItem('userLevelChoice', '80avanco');
+                        loadingOverlay.classList.add('active'); // Activate loading
+                        setTimeout(() => {
+                            loadingOverlay.classList.remove('active'); // Deactivate loading
+                            showSection('home'); // Go to home after loading
+                        }, 2000); // 2 seconds loading
+                    } else {
+                        setTimeout(() => {
+                            levelSplashScreen.classList.remove('hidden'); // Show level splash for other classes
+                        }, 500); // Time for the fade out of the first splash
+                    }
+                }
+            }
+
+            // Função para esconder a splash screen de nível e mostrar o conteúdo principal
+            let selectedLevel = null; // Para armazenar a escolha do nível
+
+            function hideLevelSplashScreen() {
+                const levelSplashScreen = document.getElementById('level-splash-screen');
+                const loadingOverlay = document.getElementById('loading-overlay');
+                const advancedMenuItem = document.getElementById('advancedMenuItem');
+                const dragonChanterLinkInMenu = document.querySelector('#classesSubmenu a[data-class-display="encantador-dragoes"]'); 
+
+                if (levelSplashScreen && loadingOverlay && selectedLevel) {
+                    audio.play().catch(e => console.error("Erro ao reproduzir som:", e));
+                     // Tenta tocar a música de fundo
+                    backgroundMusic.play().catch(e => console.log("Autoplay de música bloqueado pelo navegador após interação:", e));
+
+                    levelSplashScreen.classList.add('hidden');
+
+                    // Note: 'trancanivel' tab is already removed in applyUserPreferences.
+                    // This block just applies visual restrictions and userLevelChoice.
+                    if (selectedLevel === 'tranca-nivel') {
+                        loadingOverlay.classList.add('active'); // Ativa o loading
+                        // Aplica as restrições de "Tranca Nível"
+                        if (advancedMenuItem) {
+                            advancedMenuItem.style.display = 'none'; // Esconde o item "Avançado"
+                        }
+                        if (dragonChanterLinkInMenu) {
+                            dragonChanterLinkInMenu.classList.add('dragon-chanter-locked'); // Estiliza em vermelho e negrito
+                            dragonChanterLinkInMenu.onclick = (e) => { // Sobrescreve o onclick para tremer e impedir acesso
+                                e.preventDefault();
+                                document.body.classList.add('shake');
+                                setTimeout(() => {
+                                    document.body.classList.remove('shake');
+                                }, 500); // Remove a classe shake após a animação
+                                // Não navega, apenas treme e avisa (opcionalmente)
+                                console.log("Acesso à classe Encantador de Dragões bloqueado em Tranca Nível.");
+                            };
+                        }
+                        userLevelChoice = 'tranca-nivel';
+                        localStorage.setItem('userLevelChoice', 'tranca-nivel');
+
+                        setTimeout(() => {
+                            loadingOverlay.classList.remove('active'); // Desativa o loading
+                            showSection('home'); // Vai para a home após o loading
+                        }, 2000); // Tempo de loading (2 segundos)
+                    } else { // 80avanco
+                        userLevelChoice = '80avanco';
+                        localStorage.setItem('userLevelChoice', '80avanco');
+                        // Garante que o menu "Avançado" e o link "Encantador de Dragões" estejam visíveis/normais
+                        if (advancedMenuItem) {
+                            advancedMenuItem.style.display = ''; // Volta ao display padrão
+                        }
+                        if (dragonChanterLinkInMenu) {
+                            dragonChanterLinkInMenu.classList.remove('dragon-chanter-locked');
+                            // Restaura o onclick original se necessário (pode não ser necessário se o showSection já lida com isso)
+                            dragonChanterLinkInMenu.onclick = (e) => showSection('habilidades');
+                        }
+                        showSection('home'); // Vai direto para a home
+                    }
+                }
+            }
+
+            // Função para aplicar as preferências do usuário ao carregar a página
+            function applyUserPreferences() {
+                const advancedMenuItem = document.getElementById('advancedMenuItem');
+                const dragonChanterLinkInMenu = document.querySelector('#classesSubmenu a[data-class-display="encantador-dragoes"]');
+
+                // Remove a aba "Tranca Nível" do cabeçalho
+                const trancaNivelMenuItem = document.querySelector('nav ul li a[href="#trancanivel"]');
+                if (trancaNivelMenuItem && trancaNivelMenuItem.parentElement) {
+                    trancaNivelMenuItem.parentElement.remove();
+                }
+
+                // Desativa o link da aba "Titãs"
+                const titasLink = document.querySelector('nav ul li a[onclick*="showSection(\'titas\')"]');
+                if (titasLink) {
+                    titasLink.onclick = (e) => { e.preventDefault(); /* Nada acontece */ }; // Remove o evento e desabilita
+                    titasLink.classList.add('cursor-not-allowed', 'opacity-50'); // Adiciona estilo de desabilitado
+                    titasLink.innerHTML = 'Titãs (Em Breve)'; // Opcional: altera texto para indicar que está em construção
+                }
+
+
+                if (userLevelChoice === 'tranca-nivel') {
+                    if (advancedMenuItem) {
+                        advancedMenuItem.style.display = 'none';
+                    }
+                    if (dragonChanterLinkInMenu) {
+                        dragonChanterLinkInMenu.classList.add('dragon-chanter-locked');
+                        dragonChanterLinkInMenu.onclick = (e) => {
+                            e.preventDefault();
+                            document.body.classList.add('shake');
+                            setTimeout(() => {
+                                document.body.classList.remove('shake');
+                            }, 500);
+                            console.log("Acesso à classe Encantador de Dragões bloqueado em Tranca Nível.");
+                        };
+                    }
+                } else if (userLevelChoice === '80avanco') {
+                    if (advancedMenuItem) {
+                        advancedMenuItem.style.display = ''; // Garante que esteja visível
+                    }
+                    if (dragonChanterLinkInMenu) {
+                        dragonChanterLinkInMenu.classList.remove('dragon-chanter-locked');
+                        dragonChanterLinkInMenu.onclick = (e) => showSection('habilidades'); // Restaura o comportamento normal
+                    }
+                }
+            }
+
+            // Função para renderizar os detalhes da classe selecionada na seção #habilidades
+            function renderClassDetails(classToDisplay) { 
+                const classDetailsContainer = document.getElementById('class-details-container');
+                if (!classDetailsContainer) return;
+
+                if (!userLevelChoice) { 
+                    classDetailsContainer.innerHTML = `
+                        <p class="text-gray-300 text-lg text-center">Por favor, selecione seu nível na tela inicial para ver os detalhes das habilidades.</p>
+                    `;
+                    return;
+                }
+
+                // First, check if the 'encantador-dragoes' class is locked in 'tranca-nivel' mode
+                if (classToDisplay === 'encantador-dragoes' && userLevelChoice === 'tranca-nivel') {
+                    classDetailsContainer.innerHTML = `
+                        <img src="${classDetails['encantador-dragoes']['tranca-nivel'].image}" alt="${classDetails['encantador-dragoes']['tranca-nivel'].title}" loading="lazy" class="w-full h-auto rounded-md mb-4 border-2 border-red-500 shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-red-400">${classDetails['encantador-dragoes']['tranca-nivel'].title}</h3>
+                        <p class="text-gray-300 text-justify mb-4">${classDetails['encantador-dragoes']['tranca-nivel'].description}</p>
+                        <p id="dragon-chanter-message" class="text-red-400 text-sm mt-2">Você precisa avançar profissão para esta ação</p>
+                    `;
+                    return; // Exit the function since the class is locked
+                }
+
+                const details = classDetails[classToDisplay]?.[userLevelChoice];
+
+                if (details) {
+                    classDetailsContainer.innerHTML = `
+                        <img src="${details.image}" alt="${details.title}" loading="lazy" class="w-full h-auto rounded-md mb-4 border-2 border-blue-500 shadow-lg">
+                        <h3 class="text-2xl font-semibold mb-2 text-blue-200">${details.title}</h3>
+                        <p class="text-gray-300 text-justify mb-4">${details.description}</p>
+                    `;
+                } else {
+                    classDetailsContainer.innerHTML = `
+                        <p class="text-gray-300 text-lg text-center">Detalhes para a classe "${classToDisplay}" no modo "${userLevelChoice}" não encontrados.</p>
+                        <p class="text-gray-300 text-center">Por favor, selecione outra classe ou nível, ou aguarde por atualizações.</p>
+                    `;
+                }
+
+                // Highlight the selected class in the menu
+                document.querySelectorAll('#classesSubmenu a').forEach(link => {
+                    link.classList.remove('text-green-400', 'font-bold', 'text-blue-400'); // Remove all highlights first
+                    if (link.dataset.classDisplay === userClassChoice) { // Highlight the user's initially selected class in green
+                        link.classList.add('text-green-400', 'font-bold');
+                    }
+                    // If a specific class was passed to renderClassDetails (e.g., from a submenu click)
+                    // and it's different from the user's initial choice, highlight it in blue.
+                    if (classToDisplay && link.dataset.classDisplay === classToDisplay && classToDisplay !== userClassChoice) {
+                        link.classList.add('text-blue-400', 'font-bold');
+                    }
+                });
+            }
+
+            // Função para renderizar os detalhes de um pet específico
+            function renderPetDetails(petId) {
+                const petDetailsContainer = document.getElementById('current-pet-details-container');
+                if (!petDetailsContainer) return;
+
+                if (!userLevelChoice) {
+                    petDetailsContainer.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-4 text-blue-300">Detalhes do Pet</h2>
+                        <p class="text-gray-300 text-lg text-center">Por favor, selecione seu nível na tela inicial para ver os detalhes dos pets.</p>
+                    `;
+                    return;
+                }
+
+                // Check if pet data exists for the chosen level
+                const details = petSkills[petId]?.[userLevelChoice];
+
+                if (details) {
+                    let activeSkillsHtml = '';
+                    if (details.active_skills && details.active_skills.length > 0) {
+                        activeSkillsHtml = `<h4 class="text-xl font-semibold mt-4 mb-2 text-blue-200">Habilidades Ativas Importantes:</h4><ul class="list-disc list-inside text-gray-300 space-y-2 text-left w-full max-w-lg">`;
+                        activeSkillsHtml += details.active_skills.map(skill => `
+                            <li>
+                                <strong>${skill.name}</strong>${skill.cooldown ? ' (Tempo de resfriamento: ' + skill.cooldown + ')' : ''}: ${skill.description}
+                            </li>
+                        `).join('');
+                        activeSkillsHtml += `</ul>`;
+                    }
+
+                    let passiveSkillsHtml = '';
+                    if (details.passive_skills && details.passive_skills.length > 0) {
+                        passiveSkillsHtml = `<h4 class="text-xl font-semibold mt-4 mb-2 text-blue-200">Habilidades Passivas Importantes:</h4><ul class="list-disc list-inside text-gray-300 space-y-2 text-left w-full max-w-lg">`;
+                        passiveSkillsHtml += details.passive_skills.map(skill => `
+                            <li>
+                                <strong>${skill.name}</strong>: ${skill.description}
+                            </li>
+                        `).join('');
+                        passiveSkillsHtml += `</ul>`;
+                    }
+
+                    petDetailsContainer.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-4 text-blue-300">Detalhes do Pet: ${petId.charAt(0).toUpperCase() + petId.slice(1)} (${userLevelChoice === 'tranca-nivel' ? 'Tranca Nível' : '80 Avanço'})</h2>
+                        <img src="${details.main_image}" alt="Pet ${petId} ${userLevelChoice}" loading="lazy" class="w-full max-w-sm h-auto rounded-md mb-4 border-2 border-blue-500 shadow-lg">
+                        <p class="text-gray-300 text-justify mb-4">${details.intro}</p>
+                        
+                        ${activeSkillsHtml}
+                        
+                        ${passiveSkillsHtml}
+                        
+                        ${details.outro ? `<p class="text-gray-300 text-justify mt-4">${details.outro}</p>` : ''}
+                    `;
+                } else {
+                    petDetailsContainer.innerHTML = `
+                        <h2 class="text-3xl font-bold mb-4 text-blue-300">Detalhes do Pet</h2>
+                        <p class="text-gray-300 text-lg text-center">Detalhes para o pet "${petId}" no modo "${userLevelChoice}" não encontrados.</p>
+                        <p class="text-gray-300 text-center">Por favor, selecione outro pet ou nível, ou aguarde por atualizações.</p>
+                    `;
+                }
+            }
+
+            const videosData = [
+                {
+                    title: "Nova Atualização do Jogo: Conteúdo e Desafios!",
+                    url: "https://www.youtube.com/embed/kwFVMqPZDjQ?si=opXzaPf3OCS_9ben",
+                    description: "Confira todas as novidades da última atualização, novos eventos, masmorras e desafios épicos!",
+                    image_src: "https://i.ytimg.com/vi/kwFVMqPZDjQ/hqdefault.jpg", // Thumbnail for YouTube video
+                    image_alt: "Gameplay de atualização"
+                },
+                {
+                    title: "Últimas Mudanças no Jogo!",
+                    url: "https://www.youtube.com/embed/L_MdRkbXXEU?si=BRK2ljSMi40iL9-y",
+                    description: "Um resumo rápido sobre as mudanças recentes que impactarão sua jogabilidade e estratégias!",
+                    image_src: "https://i.ytimg.com/vi/L_MdRkbXXEU/hqdefault.jpg", // Thumbnail for YouTube video
+                    image_alt: "Vídeo sobre mudanças no jogo"
+                }
+            ];
+
+            function renderVideos() {
+                const videoGrid = document.getElementById('video-grid');
+                if (!videoGrid) return;
+                videoGrid.innerHTML = ''; // Clear existing content
+
+                videosData.forEach(video => {
+                    const videoHtml = `
+                        <div class="bg-gray-800 p-6 rounded-lg text-center">
+                            <div class="relative pb-9/16 h-0 overflow-hidden rounded-md mb-4" style="padding-bottom: 56.25%;">
+                                <iframe class="absolute top-0 left-0 w-full h-full" 
+                                    src="${video.url}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen 
+                                    title="${video.image_alt}">
+                                </iframe>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-blue-200">${video.title}</h3>
+                            <p class="text-gray-300">${video.description}</p>
+                        </div>
+                    `;
+                    videoGrid.insertAdjacentHTML('beforeend', videoHtml);
+                });
+            }
+
+
+            // Array para armazenar as adições recentes (artigos/conteúdo)
+            // Priorizando GIFs e limitando a 6 itens
+            const recentAdditionsData = [
+                {
+                    title: "Novo Guia de Habilidades da Frigg!",
+                    description: "Descubra as novas habilidades e aprimoramentos da Frigg para dominar seus oponentes!",
+                    image_src: "https://i.postimg.cc/Pxzdd3BD/2025-06-18-20-38-32-online-video-cutter-com.gif",
+                    target_section_id: "pet-details-section", 
+                    target_content_id: "frigg", 
+                    is_new: true 
+                },
+                {
+                    title: "Atualização da Arma Divina",
+                    description: "Novas formas de fortalecer sua Arma Divina e liberar seu potencial máximo!",
+                    image_src: "https://i.postimg.cc/Kj43qpcn/arma-divina.gif",
+                    target_section_id: "divine-weapon-details",
+                    is_new: true
+                },
+                {
+                    title: "Guia Completo: Habilidades do Mago (80 Avanço)",
+                    description: "Desencadeie o poder arcano do Mago em nível de avanço (80 Avanço).",
+                    image_src: "https://i.postimg.cc/wB71NXd1/mago-avan-o.gif",
+                    target_section_id: "habilidades",
+                    target_content_id: "mago", 
+                    is_new: true
+                },
+                {
+                    title: "Guia Completo: Habilidades do Mago (Tranca Nível)",
+                    description: "Conheça o Mago na Tranca Nível. Maximize seu controle de multidão e dano.",
+                    image_src: "https://i.postimg.cc/mrtsjVkG/mago-tranca.gif",
+                    target_section_id: "habilidades",
+                    target_content_id: "mago", 
+                    is_new: true
+                },
+                {
+                    title: "Novo Guia: Habilidades do Thor (Tranca Nível)",
+                    description: "Detalhamos as habilidades essenciais do Thor para quem joga no modo Tranca Nível!",
+                    image_src: "https://i.postimg.cc/ZRYygg90/Screenshot-13.jpg", 
+                    target_section_id: "pet-details-section",
+                    target_content_id: "thor", 
+                    is_new: true
+                },
+                {
+                    title: "Guia Avançado: Habilidades do Thor (80 Avanço)",
+                    description: "Conheça as habilidades do Thor para maximizar o dano no modo 80 Avanço, incluindo o uso da Arma Divina.",
+                    image_src: "https://i.postimg.cc/B6kvmSjC/thor.gif", 
+                    target_section_id: "pet-details-section",
+                    target_content_id: "thor", 
+                    is_new: true
+                },
+                {
+                    title: "Nova Atualização do Jogo: Conteúdo e Desafios!",
+                    description: "Confira todas as novidades da última atualização, novos eventos, masmorras e desafios épicos!",
+                    image_src: "https://i.ytimg.com/vi/kwFVMqPZDjQ/hqdefault.jpg", // Thumbnail for YouTube video
+                    target_section_id: "videos",
+                    is_new: true
+                },
+                {
+                    title: "Últimas Mudanças no Jogo!",
+                    description: "Um resumo rápido sobre as mudanças recentes que impactarão sua jogabilidade e estratégias!",
+                    image_src: "https://i.ytimg.com/vi/L_MdRkbXXEU/hqdefault.jpg", // Thumbnail for YouTube video
+                    target_section_id: "videos",
+                    is_new: true
+                }
+            ];
+
+            // Função para renderizar as adições recentes
+            function renderRecentAdditions() {
+                const recentAdditionsGrid = document.getElementById('recent-additions-grid');
+                if (!recentAdditionsGrid) return; // Garante que o elemento existe
+
+                recentAdditionsGrid.innerHTML = ''; // Limpa o conteúdo existente
+
+                // Prioriza os itens com is_new: true e gifs, e limita a 6
+                const prioritizedAdditions = recentAdditionsData
+                    .sort((a, b) => {
+                        // Prioriza itens com GIF e is_new = true
+                        const aHasGif = a.image_src.endsWith('.gif');
+                        const bHasGif = b.image_src.endsWith('.gif');
+
+                        if (a.is_new && b.is_new) {
+                            if (aHasGif && !bHasGif) return -1;
+                            if (!aHasGif && bHasGif) return 1;
+                        } else if (a.is_new && !b.is_new) {
+                            return -1;
+                        } else if (!a.is_new && b.is_new) {
+                            return 1;
+                        }
+                        // Secondary sort: alphabetical by title if priority is the same
+                        return a.title.localeCompare(b.title);
+                    })
+                    .slice(0, 6); // Limita aos primeiros 6 itens
+
+                prioritizedAdditions.forEach(item => {
+                    const cardHtml = `
+                        <div class="tutorial-card">
+                            <img src="${item.image_src}" alt="${item.title}" loading="lazy">
+                            <div class="tutorial-card-content">
+                                <h3>${item.title}</h3>
+                                <p>${item.description}</p>
+                                <a href="${item.target_section_id ? '#' + item.target_section_id : '#'}" 
+                                   onclick="${item.target_section_id ? 'showSection(\'' + item.target_section_id + '\', \'' + (item.target_content_id || '') + '\')' : 'return false;'}" 
+                                   class="view-button ${!item.target_section_id ? 'opacity-50 cursor-not-allowed' : ''}">
+                                    Ver Detalhes
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    recentAdditionsGrid.insertAdjacentHTML('beforeend', cardHtml);
+                });
+            }
+
+
+            // Adiciona event listeners para as imagens da splash screen inicial
+            document.addEventListener('DOMContentLoaded', () => {
+                const initialClassImages = document.querySelectorAll('#splash-screen .splash-images-grid img');
+                initialClassImages.forEach(img => {
+                    img.addEventListener('click', () => {
+                        hideInitialSplashScreen(img.dataset.classChoice);
+                    });
+                });
+
+                const levelOptions = document.querySelectorAll('#level-splash-screen .level-option');
+                const continueLevelBtn = document.getElementById('continueLevelBtn');
+
+                levelOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        // Remove seleção de todos os outros
+                        levelOptions.forEach(opt => opt.classList.remove('selected'));
+                        // Adiciona seleção ao clicado
+                        option.classList.add('selected');
+                        selectedLevel = option.dataset.levelChoice;
+                        continueLevelBtn.disabled = false;
+                        continueLevelBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    });
+                });
+
+                continueLevelBtn.addEventListener('click', hideLevelSplashScreen);
+
+                // Carrega a preferência de mudo do usuário ao carregar a página
+                const isMuted = localStorage.getItem('isMuted');
+                if (isMuted === 'true') {
+                    backgroundMusic.muted = true;
+                }
+                updateMuteButtonIcon(); // Atualiza o ícone do botão de mute ao carregar a página
+
+
+                // Carrega a preferência do usuário ao carregar a página
+                applyUserPreferences();
+
+                // Renderiza as adições recentes
+                renderRecentAdditions();
+
+
+                // Se o usuário já fez uma escolha de nível, pule as splash screens e mostre a home
+                if (userClassChoice && userLevelChoice) {
+                    const splashScreen = document.getElementById('splash-screen');
+                    const levelSplashScreen = document.getElementById('level-splash-screen');
+                    if (splashScreen) splashScreen.classList.add('hidden');
+                    if (levelSplashScreen) levelSplashScreen.classList.add('hidden');
+                    showSection('home'); // Redireciona para a home
+                } else if (userClassChoice && !userLevelChoice) {
+                    // Se a classe foi escolhida mas o nível não, mostra a splash de nível
+                    const splashScreen = document.getElementById('splash-screen');
+                    const levelSplashScreen = document.getElementById('level-splash-screen');
+                    if (splashScreen) splashScreen.classList.add('hidden');
+                    if (levelSplashScreen) levelSplashScreen.classList.remove('hidden');
+                } else {
+                    // Caso contrário, certifique-se de que a primeira splash esteja visível
+                    const splashScreen = document.getElementById('splash-screen');
+                    if (splashScreen) {
+                         splashScreen.classList.remove('hidden'); // Garante que esteja visível inicialmente
+                    }
+                }
+            });
+
+            // Código para o Conselheiro de Pets e Builds (Gemini API)
+            document.getElementById('generateSuggestionBtn').addEventListener('click', async () => {
+                const userInput = document.getElementById('buildAdvisorInput').value;
+                const outputDiv = document.getElementById('advisorOutput');
+                const loadingDiv = document.getElementById('advisorLoading');
+
+                // Mostrar loading e esconder output
+                outputDiv.classList.add('hidden');
+                loadingDiv.classList.remove('hidden');
+                outputDiv.innerHTML = ''; // Limpar conteúdo anterior
+
+                if (!userInput.trim()) {
+                    outputDiv.textContent = 'Por favor, descreva seu personagem e estilo de jogo para obter uma sugestão.';
+                    outputDiv.classList.remove('hidden');
+                    loadingDiv.classList.add('hidden');
+                    return;
+                }
+
+                // Informações sobre Pets e seus elementos
+                const petInfo = `
+    Hierarquia e Elementos dos Pets em Legend Online BR:
+    1. Fusões Supremas:
+        - Thor (Fogo, Choque): Fusão de Zeus (Choque) e Ares (Fogo).
+        - Odin (Luz, Escuridão): Fusão de Hera (Luz) e Vênus (Escuridão).
+        - Frigg (Vento, Água): Fusão de Deusa da Colheita (Vento) e Poseidon (Água).
+        - Características: Podem utilizar a Arma Divina; são fortalecidos e evoluídos com pedras de fortalecimento e evolução avançadas, atingindo a elevação suprema ou Pet Vermelho (Red).
+
+    2. Fusões Normais:
+        - Tyr (Choque, Fogo): Fusão de Hércules (Choque) e Kersy (Fogo).
+        - Lokey (Luz, Escuridão): Fusão de Gaia (Escuridão) e Athena (Luz).
+        - Freya (Vento, Água): Fusão de Medusa (Vento) e Tritão (Água).
+        - Características: Podem utilizar a Arma Divina.
+
+    3. Pets Supremos (Não Fundidos):
+        - Zeus (Choque): Componente para Thor.
+        - Ares (Fogo): Componente para Thor.
+        - Deusa da Colheita (Vento): Componente para Frigg.
+        - Poseidon (Água): Componente para Frigg.
+        - Hera (Luz): Componente para Odin.
+        - Vênus (Escuridão): Componente para Odin.
+        - Características: Pets poderosos de alto nível, mas com apenas um elemento e sin acceso a habilidades combinadas o a la Arma Divina.
+
+    4. Pets Divinos (Pre-Fusion):
+        - Hércules (Choque): Componente para Tyr.
+        - Kersy (Fogo): Componente para Tyr.
+        - Medusa (Vento): Componente para Freya.
+        - Tritón (Agua): Componente para Freya.
+        - Gaia (Escuridão): Componente para Lokey.
+        - Atena (Luz): Componente para Lokey.
+
+    5. Pets Básicos (Iniciales): Esenciales para el inicio, sin elementos específicos o fusiones.
+    `;
+
+                const sphereInfo = `
+    Tipos de Esferas Míticas y Sus Bonos:
+    - Esfera de Ataque: Aumenta dano físico e mágico.
+    - Esfera de Defesa: Melhora resistência a danos, HP, Defesa Física e Mágica.
+    - Esfera de Suporte: Bônus para cura, buffs ou controle de grupo.
+    - Esfera de Crítico: Aumenta chance e dano crítico.
+    - Esfera de Vitalidade: Aumenta HP máximo.
+    - Esfera de Velocidade: Acelera recuperação de recursos e, por vezes, velocidade de ataque.
+    `;
+
+                const fullPrompt = `Você é um especialista em Legend Online BR e um conselheiro de builds. Com base nas informações abaixo sobre o sistema de pets e esferas míticas, e na descrição do personagem fornecida pelo usuário, crie uma sugestão detalhada.
+
+    ${petInfo}
+
+    ${sphereInfo}
+
+    Descrição do Personagem: "${userInput}"
+
+    Por favor, forneça uma sugestão clara e útil, incluindo:
+    1.  **Pet Sugerido:** Qual pet (com seu(s) elemento(s) e categoria - ex: "Thor (Fusão Suprema, Fogo, Choque)") você recomendaria?
+    2.  **Justificativa:** Por que esse pet é ideal para o estilo de jogo e classe do usuário?
+    3.  **Esferas Míticas Complementares:** Quais 1-2 tipos de Esferas Míticas complementariam bem essa build, e por quê?
+    4.  **Dica Extra:** Uma dica rápida sobre sinergia ou aprimoramento.
+
+    Formate a resposta em Markdown, utilizando negrito e listas para facilitar a leitura.`;
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errorDetails = await response.text();
+                        throw new Error(`API Error: ${response.status} - ${response.statusText} - ${errorDetails}`);
+                    }
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts.length > 0) {
+                        outputDiv.textContent = result.candidates[0].content.parts[0].text;
+                        outputDiv.classList.remove('hidden');
+                    } else {
+                        outputDiv.textContent = 'Could not generate a suggestion. Please try again later or with a different description.';
+                        outputDiv.classList.remove('hidden');
+                        console.error('Unexpected Gemini API response:', result);
+                    }
+                } catch (error) {
+                    outputDiv.textContent = `An error occurred while connecting to the Advisor: ${error.message}. Please try again.`;
+                    outputDiv.classList.remove('hidden');
+                    console.error('Error in Gemini API call:', error);
+                } finally {
+                    loadingDiv.classList.add('hidden');
+                }
+            });
+        </script>
+    </body>
+    </html>
